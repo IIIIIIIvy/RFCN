@@ -1,0 +1,1 @@
+conda activate finance && pip list && python calculatingDiffAndStat.py

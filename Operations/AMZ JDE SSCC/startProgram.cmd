@@ -1,0 +1,1 @@
+conda activate ops && python SSCC.py

@@ -1,0 +1,1 @@
+conda activate hr && python writePPT.py

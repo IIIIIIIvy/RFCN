@@ -1,0 +1,1 @@
+conda activate ops && pip list && python target_CCD_template.py

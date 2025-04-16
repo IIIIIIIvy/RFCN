@@ -1,0 +1,11 @@
+=PY(
+import pandas as pd
+import datetime
+report=xl("'Rolling RB'!A1:X348", headers=True)
+report=report[['Vendor Number','Vendor','Item','new RB Qty']]
+report=report[report['new RB Qty']>0]
+    
+report['CRD']='01-Oct'
+report=report.reset_index(drop=True)
+report
+    

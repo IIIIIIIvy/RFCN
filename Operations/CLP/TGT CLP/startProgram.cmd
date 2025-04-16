@@ -1,0 +1,1 @@
+conda activate ops && pip list && python TGT_CLP_template.py

@@ -1,0 +1,1 @@
+conda activate ops && pip list && python AMZ_US_CLP_template.py

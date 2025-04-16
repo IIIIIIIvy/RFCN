@@ -1,0 +1,46 @@
+=PY(import pandas as pd
+import datetime
+
+forecast=xl("'FCST-This week'!A2:CO1509", headers=True)
+forecast=forecast[forecast['Fabric Control'].isin(['Yes-XJH', 'Yes-XJH+CH', 'Yes-XJH(rPET)', 'YES-XJH'])]
+forecast=forecast.iloc[:,:80]
+forecast.columns = ['Branch Plant', 'Customer Num', 'Customer Name', 'Model', 'Open_Jan',
+       'Shipped_Jan', 'Forecast_Jan', 'Variance_Jan', 'Open_Feb',
+       'Shipped_Feb', 'Forecast_Feb', 'Variance_Feb', 'Open_Mar',
+       'Shipped_Mar', 'Forecast_Mar', 'Variance_Mar', 'Open_Apr',
+       'Shipped_Apr', 'Forecast_Apr', 'Variance_Apr', 'Open_May',
+       'Shipped_May', 'Forecast_May', 'Variance_May', 'Open_Jun',
+       'Shipped_Jun', 'Forecast_Jun', 'Variance_Jun', 'Open_Jul',
+       'Shipped_Jul', 'Forecast_Jul', 'Variance_Jul', 'Open_Aug',
+       'Shipped_Aug', 'Forecast_Aug', 'Variance_Aug', 'Open_Sep',
+       'Shipped_Sep', 'Forecast_Sep', 'Variance_Sep', 'Open_Oct',
+       'Shipped_Oct', 'Forecast_Oct', 'Variance_Oct', 'Open_Nov',
+       'Shipped_Nov', 'Forecast_Nov', 'Variance_Nov', 'Open_Dec',
+       'Shipped_Dec', 'Forecast_Dec', 'Variance_Dec', 'Open_2025 Jan',
+       'Shipped_2025 Jan', 'Forecast_2025 Jan', 'Variance_2025 Jan',
+       'Open_2025 Feb', 'Shipped_2025 Feb', 'Forecast_2025 Feb',
+       'Variance_2025 Feb', 'Open_2025 Mar', 'Shipped_2025 Mar',
+       'Forecast_2025 Mar', 'Variance_2025 Mar', 'Open_2025 Apr',
+       'Shipped_2025 Apr', 'Forecast_2025 Apr', 'Variance_2025 Apr',
+       'Open_2025 May', 'Shipped_2025 May', 'Forecast_2025 May',
+       'Variance_2025 May', 'Open_2025 Jun', 'Shipped_2025 Jun',
+       'Forecast_2025 Jun', 'Variance_2025 Jun', 'Vendor', 'Item Status',
+       'RB Series', 'Category']
+ 
+cal_columns=list(filter(lambda x:x.find('Variance')!=-1,forecast.columns.tolist()))
+cal_columns
+
+res=pd.DataFrame()
+for col in cal_columns:
+    forecast[col].fillna(0,inplace=True)
+    forecast[col]=forecast[col].astype(int)
+    res['Sum of '+col.split('_')[1]]=forecast.groupby(['RB Series'])[col].sum()
+
+result = pd.DataFrame()
+for col in res.columns:
+    result[col] = res[col]==0
+    result = result[result[col]]
+
+
+res=res.reset_index()
+res[~res.index.isin(result.index)]
