@@ -1,0 +1,1089 @@
+<html>
+
+<head>
+    <title>China Sales Portal</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif
+        }
+
+        .px-3 {
+            background-color: #C61C2C
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        /* svg {
+            border: gray solid 2px;
+        } */
+
+        /* .mainView {
+            display: flex;
+            flex-wrap: wrap;
+        } */
+
+        #title {
+            border-bottom: 1px solid rgb(221, 220, 220);
+            /* 设置底部边框样式 */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="px-3 py-2">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/"
+                        class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <img src="../static/svg/logo.svg" title="Radio Flyer" alt="Radio Flyer" width="250" height="21">
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a href="/" class="nav-link text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi d-block mx-auto mb-1 bi-house-door" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z">
+                                    </path>
+                                </svg>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/visualization" class="nav-link text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi d-block mx-auto mb-1 bi-speedometer2" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4M3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707M2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10m9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5m.754-4.246a.39.39 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.39.39 0 0 0-.029-.518z" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A8 8 0 0 1 0 10m8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3" />
+                                </svg>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/all" class="nav-link text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi d-block mx-auto mb-1 bi-table" viewBox="0 0 16 16">
+                                    <path
+                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z" />
+                                </svg>
+                                Records
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi d-block mx-auto mb-1 bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                                </svg>
+                                User
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div id="title" style="display: block;" class="my-3 ">
+                <h1 class="fw-bolder">The top 10 items with the highest after-sales quantity and their related factories
+                </h1>
+            </div>
+            <!-- <div id="graph" class=" d-flex align-items-center justify-content-center justify-content-lg-start">
+                 -->
+            <div id="graph" class="row">
+                <div class="item mx-0 col-lg-7">
+                    <!-- <h2>item: sales and profit</h2> -->
+                    <svg id="itemChart">
+                        <g id="rectsBar"></g>
+                        <g id="xAxisBar"></g>
+                        <g id="yAxisBar"></g>
+                    </svg>
+                </div>
+
+                <div class="segment  col-lg-4">
+                    <div class="row">
+                        <div class="col">
+                            <svg id="date">
+                                <g id="line"></g>
+                                <g id="xAxisLine"></g>
+                                <g id="yAxisLine"></g>
+
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <svg id="Other">
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- <h2>Segment: sales</h2> -->
+
+                </div>
+            </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.bundle.min.js')}}"></script>
+    <script>
+        // -------------------------------------------------------bar chart---------------------------------------------------------------------------------------
+        // 定义SVG
+        var barChartWidth = 700,
+            barChartHeight = 800;
+        var barchartPadding = {
+            top: 30,
+            left: 80,
+            bottom: 30,
+            right: 30
+        };
+        var barChart = d3.select("#itemChart")
+            .attr("width", barChartWidth)
+            .attr("height", barChartHeight);
+
+        // 读入数据并绘制函数
+        var barData = []; //强制要求是array类型，方便后面调用push函数
+        var nestByItem;
+
+        // 水平方向、垂直方向、颜色比例尺。定义在外面，避免重复定义
+        var xScale;
+        var yScale;
+        var barChartColor;
+
+        d3.json("/get_data_for_visualization").then(function (data) {
+            data = JSON.parse(data)
+            // console.log(data)
+
+            // // 过滤得到美国的数据
+            // var dataUS = data.filter(function(d) {
+            //     return d.Country == "United States";
+            // });
+
+            // 转换为数值类型
+            // dataUS.forEach((item, i) => {
+            //     item.Profit = +item.Profit;
+            // });
+
+            // 按类别重新组织数据
+            // 使用groups形成一个二维数组，二维数组上进行数据操作，注意与group的区别，group形成MAP数据
+            nestByItem = d3.groups(data, function (d) {
+                return d.item;
+            })
+            // console.log(nestBySubCategory)
+
+            nestByItem.forEach(function (item, index, array) { //第一层循环,读取以item为键的数组
+                var sumUnit = 0;
+                item[1].forEach(function (d) { //第二层循环，对数值累加
+                    sumUnit += d.defect_unit;
+                })
+                barData.push({ //将加过的结果放入bardata中
+                    item: item[0],
+                    unit: sumUnit
+                });
+            })
+
+            barData = d3.sort(barData, (a, b) => d3.descending(a.unit, b.unit))
+            barData = barData.slice(0, 10); // 获取前 10 个对象
+            // 转换为映射表形式，方便后续快速检索指定类别
+            nestByItem = d3.group(data, d => d.item)
+
+            console.log("nestBySubCategory", nestByItem)
+            console.log("drawbar(bardata)", barData);
+            drawBarChart(); // 根据barData来绘制柱状图
+        });
+
+        function updateMapAndPieFromBar(item) {
+            if (item == "all") {
+                // d3.select(".area").select("h2").text("Area: profits of all item");
+                updateLineByNewItem(lineData);
+
+                // d3.select(".segment").select("h2").text("Segment: Sales of all item");
+                updatePieByNewSales(pieData);
+            } else {
+                //---updateLine
+                // d3.select(".area").select("h2").text("Area: profits of " + item);
+                // 得到该产品在每个州的销售信息
+                data = nestByItem.get(item)
+                data.forEach(d => {
+                    d.month = d.contact_date.split("-")[1] + "/" + d.contact_date.split("-")[0];
+                });
+                // 格式化日期为月份
+                const parseDate = d3.timeParse('%m/%Y');
+                data.forEach(d => {
+                    d.month = parseDate(d.month);
+                });
+                var curInfo = d3.group(data, d => d.month);
+
+                console.log("curInfo", curInfo)
+
+                var curInfoLine = [];
+                curInfo.forEach(function (value, key, map) {
+                    console.log(value)
+                    var sumUnit = 0;
+                    value.forEach(function (d) { //第二层循环，对数值累加
+                        sumUnit += d.defect_unit;
+                    })
+                    curInfoLine.push({ //将加过的结果放入bardata中
+                        date: key,
+                        unit: sumUnit
+                    });
+                });
+
+                console.log("curInfoLine", curInfoLine)
+                // curInfoMap = d3.group(curInfoMap, d => d.state);
+                updateLineByNewItem(curInfoLine);
+
+                //---updatePie
+                // d3.select(".segment").select("h2").text("Segment: Sales of " + item);
+                curInfo = d3.group(nestByItem.get(item), d => d.factory);
+                curInfo = d3.filter(curInfo, (d) => d[0] != null)
+                console.log('curInfo', curInfo)
+
+                var curPieData = [];
+                curInfo.forEach(function (value, key, map) {
+                    var sumUnit = 0;
+                    value[1].forEach(function (d) { //第二层循环，对数值累加
+                        sumUnit += d.defect_unit;
+                    })
+                    curPieData.push({ //将加过的结果放入bardata中
+                        factory: value[0],
+                        unit: sumUnit,
+                    });
+                });
+                console.log('curPieData', curPieData)
+                updatePieByNewSales(curPieData);
+            }
+        }
+
+        function updateBarByNewProfitAndSales(curData) {
+
+            console.log("curData", curData)
+            curData = d3.sort(curData, (a, b) => d3.descending(a.unit, b.unit)).slice(0, 10);
+            console.log("curData", curData)
+
+            //--- 重新定义颜色比例尺和水平方向比例尺，只有当curData不为空时
+            if (curData.length != 0) {
+                var maxUnit = d3.max(curData, function (d) {
+                    return d.unit;
+                });
+                console.log("maxUnit", maxUnit)
+
+                barChartColor = d3.scaleSequential(d3.interpolateRdYlGn).domain([maxUnit, 0]);
+                xScale = d3.scaleLinear()
+                    .domain([0, maxUnit]) // set the input domain
+                    .range([barchartPadding.left, 800]);
+            }
+
+            //--- 某些州在某些产品上没有数据，补全数据
+            // 得到所有产品类别
+            // var allitem = yScale.domain();
+            // // 得到当前数据中有的产品类别
+            // var curitem = d3.map(curData, d => d.item);
+            // // 遍历，若当前数据没有某一类产品，push，并将profit和sales都置0
+            // for (var i = 0; i < allitem.length; i++) {
+            //     if (curitem.includes(allitem[i]) == false)
+            //         curData.push({
+            //             subCategory: allitem[i],
+            //             profit: 0,
+            //             sales: 0
+            //         });
+            // };
+            // curData.sort(function (a, b) {
+            //     return allitem.indexOf(a.subCategory) - allitem.indexOf(b.subCategory);
+            // });
+
+            yScale = d3.scaleBand()
+                .domain(curData.map(d => d.item)) // 得到所有类别信息
+                .rangeRound([barchartPadding.top, barChartHeight - barchartPadding.bottom]) // set the output range
+                .paddingInner(0.3);
+            //--- 更新条形图
+            var bars = d3.select("#itemChart").select("#rectsBar").selectAll("rect");
+
+            // 移除不再需要的柱状
+            bars.remove();
+
+            // 选择所有柱状并绑定新的数据
+            d3.select("#itemChart").select("#rectsBar").selectAll("rect").data(curData)
+                .enter()
+                .append("rect")
+                .attr("height", yScale.bandwidth())
+                .attr("x", function (d) {
+                    return xScale.range()[0];
+                })
+                .attr("y", function (d) {
+                    return yScale(d.item);
+                })
+                .transition()
+                .duration(500)
+                .ease(d3.easeLinear)
+                .attr("width", function (d) {
+                    return xScale(d.unit) - xScale(0);
+                })
+                .style("fill", function (d) {
+                    return barChartColor(d.unit);
+                });
+            d3.select("#itemChart").select("#rectsBar").selectAll("rect")
+                .append("title")
+                .text(function (d) { // 更新每个州的title信息。
+                    return "Units: " + d3.format(".0f")(d.unit);
+                })
+            // 为所有条形添加交互响应
+            d3.select("#itemChart").select("#rectsBar").selectAll("rect")
+                .on("click", function (event, d) { //注意click事件需要添加event参数
+                    d3.select("#itemChart").select("#rectsBar").selectAll("rect").style("stroke", "none");
+                    d3.select(this).style("stroke", "red");
+                    updateMapAndPieFromBar(d.item);
+                })
+
+            //--- 更新X坐标轴
+            var xAxisBar = d3.axisBottom(xScale); //底部的轴
+            xAxisBar.ticks(6); // 限制tick个数为3
+            d3.select("#xAxisBar")
+                .transition()
+                .duration(500)
+                .ease(d3.easeLinear)
+                .call(xAxisBar)
+                .attr("transform", "translate(0," + yScale.range()[1] + ")");
+
+            // 绘制Y坐标轴
+            var yAxisBar = d3.axisLeft(yScale); //左边的轴
+            d3.select("#yAxisBar")
+                .transition()
+                .duration(500)
+                .ease(d3.easeLinear)
+                .call(yAxisBar)
+                .attr("transform", "translate(" + xScale.range()[0] + ")", 0);
+        }
+
+        function drawBarChart() {
+            //--- 定义水平方向、垂直方向、颜色比例尺
+            // 得到最大数量
+            var maxUnit = d3.max(barData, d => d.unit);
+            // 定义水平方向比例尺
+            var xScale = d3.scaleLinear()
+                .domain([0, maxUnit]) // set the input domain
+                .range([barchartPadding.left, 700]);
+            // 定义垂直方向比例尺
+            var yScale = d3.scaleBand()
+                .domain(barData.map(d => d.item)) // 得到所有类别信息
+                .rangeRound([barchartPadding.top, barChartHeight - barchartPadding.bottom]) // set the output range
+                .paddingInner(0.3);
+            // 得到最大利润
+            // var maxProfit = d3.max(barData, d => d.profit);
+            // 定义颜色比例尺
+            var barChartColor = d3.scaleSequential(d3.interpolateRdYlGn)
+                .domain([maxUnit, 0]);
+
+            //--- 绘制柱状图
+            // 绘制柱状图前的透明矩形块，并为其添加交互
+            var referenceRect = barChart.insert("g", "#rectsBar").append("rect")
+                .attr("width", xScale.range()[1] - xScale.range()[0])
+                .attr("height", yScale.range()[1] - yScale.range()[0])
+                .attr("x", xScale.range()[0])
+                .attr("y", yScale.range()[0])
+                .attr("fill", "gray")
+                .attr("opacity", "0");
+
+            referenceRect.on("click", function (event) {
+                d3.select("#itemChart").select("#rectsBar").selectAll("rect").style("stroke", "none");
+                updateMapAndPieFromBar("all");
+            });
+
+            // 绘制柱状图的条形
+            var bars = d3.select("#rectsBar")
+                .selectAll("rect")
+                .data(barData)
+                .join("rect");
+
+            bars.attr("width", function (d) {
+                return xScale(d.unit) - xScale(0);
+            })
+                .attr("height", yScale.bandwidth())
+                .attr("x", function (d) {
+                    return xScale.range()[0];
+                })
+                .attr("y", function (d) {
+                    return yScale(d.item);
+                })
+                .style("fill", function (d) {
+                    return barChartColor(d.unit);
+                })
+                .append("title")
+                .text(function (d) { // 更新每个州的title信息。
+                    return "Units: " + d3.format(".0f")(d.unit);
+                });
+
+            // 为所有条形添加交互响应
+            bars.on("click", function (event, d) { //注意click事件需要添加event参数
+                bars.style("stroke", "none");
+                d3.select(this).style("stroke", "red");
+                updateMapAndPieFromBar(d.item);
+            })
+
+            // 绘制X坐标轴
+            var xAxisBar = d3.axisBottom(xScale); //底部的轴
+            xAxisBar.ticks(6); // 限制tick个数为3
+            d3.select("#xAxisBar").call(xAxisBar)
+                .attr("transform", "translate(0," + yScale.range()[1] + ")")
+                .attr("font-size", 10.5);
+
+            // 绘制Y坐标轴
+            var yAxisBar = d3.axisLeft(yScale); //左边的轴
+            d3.select("#yAxisBar").call(yAxisBar)
+                .attr("transform", "translate(" + xScale.range()[0] + ")", 0)
+                .attr("font-size", 10.5);
+        }
+
+        // ------------------------------------------------------line chart---------------------------------------------------------------------------------------
+        // 定义SVG
+        var lineChartWidth = 550,
+            lineChartHeight = 400;
+        var linechartPadding = {
+            top: 20,
+            left: 30,
+            bottom: 20,
+            right: 20
+        };
+        var lineChart = d3.select("#date")
+            .attr("width", lineChartWidth)
+            .attr("height", lineChartHeight);
+
+        // 读入数据并绘制函数
+        var lineData = []; //强制要求是array类型，方便后面调用push函数
+        var nestByDate;
+
+        // 水平方向、垂直方向、颜色比例尺。定义在外面，避免重复定义
+        var xScaleLine;
+        var yScaleLine;
+        var lineChartColor;
+
+        d3.json("/get_data_for_visualization").then(function (data) {
+            data = JSON.parse(data)
+            // 处理日期数据：提取月份信息
+            data.forEach(d => {
+                d.month = d.contact_date.split("-")[1] + "/" + d.contact_date.split("-")[0];
+            });
+            // 格式化日期为月份
+            const parseDate = d3.timeParse('%m/%Y');
+            data.forEach(d => {
+                d.month = parseDate(d.month);
+            });
+
+            // 按类别重新组织数据
+            // 使用groups形成一个二维数组，二维数组上进行数据操作，注意与group的区别，group形成MAP数据
+            nestByDate = d3.groups(data, function (d) {
+                return d.month;
+            })
+            console.log("nestByDate", nestByDate)
+
+            nestByDate.forEach(function (item, index, array) { //第一层循环,读取以item为键的数组
+                var sumUnit = 0;
+                item[1].forEach(function (d) { //第二层循环，对数值累加
+                    sumUnit += d.defect_unit;
+                })
+                lineData.push({ //将加过的结果放入bardata中
+                    date: item[0],
+                    unit: sumUnit
+                });
+            })
+
+            lineData = d3.sort(lineData, (a, b) => d3.ascending(a.date, b.date))
+            lineData = lineData.slice(0, 12); // 获取前 10 个对象
+            // 转换为映射表形式，方便后续快速检索指定类别
+            nestByDate = d3.group(data, d => d.month)
+
+            console.log("nestByDate", nestByDate)
+            console.log("drawline(lineData)", lineData);
+
+            drawLineChart(); // 根据barData来绘制柱状图
+        });
+
+        function updateBarAndPieFromLine(date) {
+            if (date == "all") {
+                // d3.select(".area").select("h2").text("Area: profits of all item");
+                updateBarByNewProfitAndSales(barData);
+
+                // d3.select(".segment").select("h2").text("Segment: Sales of all item");
+                updatePieByNewSales(pieData);
+            } else {
+                //---updateMap
+                var curInfoBar = [];
+                // 得到对应segment数据，并按类别重新组织数据
+                // 使用groups形成一个二维数组，二维数组上进行数据操作，注意与group的区别，group形成MAP数据
+                var curInfo = d3.groups(nestByDate.get(date), function (d) {
+                    return d.item;
+                })
+                console.log("curInfo", curInfo)
+
+                curInfo.forEach(function (item, index, array) { //第一层循环,读取0-16个数组
+                    var sumUnit = 0;
+                    item[1].forEach(function (d) { //第二层循环，对数值累加
+                        sumUnit += d.defect_unit;
+                    })
+                    curInfoBar.push({ //将加过的结果放入bardata中
+                        item: item[0],
+                        unit: sumUnit
+                    });
+                })
+                console.log("curInfoBar", curInfoBar)
+                updateBarByNewProfitAndSales(curInfoBar);
+
+                //---updatePie
+                // d3.select(".segment").select("h2").text("Segment: Sales of " + item);
+                curInfo = d3.group(nestByDate.get(date), d => d.factory);
+                curInfo = d3.filter(curInfo, (d) => d[0] != null)
+
+                var curPieData = [];
+                curInfo.forEach(function (value, key, map) {
+                    console.log(value)
+                    var sumUnit = 0;
+                    value[1].forEach(function (d) { //第二层循环，对数值累加
+                        sumUnit += d.defect_unit;
+                    })
+                    curPieData.push({ //将加过的结果放入bardata中
+                        factory: value[0],
+                        unit: sumUnit,
+                    });
+                });
+                console.log('curPieData', curPieData)
+                updatePieByNewSales(curPieData);
+            }
+        }
+
+        function updateLineByNewItem(curData) {
+            curData = d3.sort(curData, (a, b) => d3.ascending(a.date, b.date))
+            curData = curData.slice(0, 12);
+
+            //--- 重新定义比例尺
+            var xScaleLine = d3.scaleTime()
+                .domain(d3.extent(curData, d => d.date)) // set the input domain
+                .range([linechartPadding.left, 500]);
+            var yScaleLine = d3.scaleLinear()
+                .domain([d3.max(curData, d => d.unit), 0]) // 得到所有类别信息
+                .rangeRound([linechartPadding.top, lineChartHeight - linechartPadding.bottom]); // set the output range;
+
+            //--- 绘制条形图和节点
+            var lines = d3.line()
+                .x(d => xScaleLine(d.date))
+                .y(d => yScaleLine(d.unit))
+                .curve(d3.curveCardinal);
+
+            d3.select("#line").select('path').remove();
+            d3.select("#line").selectAll('.node').remove();
+            d3.select("#line")
+                .append('path')
+                .datum(curData)
+                .attr("fill", "none")
+                .attr("stroke", "#FCB066")
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-linecap", "round")
+                .attr("stroke-width", "4")
+                .attr("d", lines);
+
+            // 绘制节点
+            d3.select("#line")
+                .selectAll('.node')
+                .data(curData)
+                .enter().append('circle')
+                .attr('class', 'node')
+                .attr('cx', d => xScaleLine(d.date))
+                .attr('cy', d => yScaleLine(d.unit))
+                .attr('r', 4) // 设置节点半径
+                .attr('fill', 'white')// 设置节点填充颜色
+                .attr('stroke', '#FCB066')
+                .append('title')
+                .text(function (d) { // 更新每个州的title信息。
+                    return "Units: " + d3.format(".0f")(d.unit);
+                });
+
+            var nodes = d3.select("#line").selectAll('.node');
+            // 为所有节点添加交互响应
+            nodes.on("click", function (event, d) { //注意click事件需要添加event参数
+                nodes.style("stroke", "#FCB066")
+                    .style('stroke-width', '1')
+                    .attr('r', 4);
+                d3.select(this)
+                    .style("stroke", "red")
+                    .style('stroke-width', '3')
+                    .attr('r', 6);
+                updateBarAndPieFromLine(d.date);
+            })
+
+            // 连线动画
+            d3.select("#line")
+                .select('path')
+                .attr('stroke', '#FCB066')
+                .style('stroke-dasharray', function () {
+                    return d3.select(this).node().getTotalLength()
+                })
+                .style('stroke-dashoffset', function () {
+                    return d3.select(this).node().getTotalLength()
+                })
+                .transition()
+                .duration(1000)
+                .delay(100)
+                .ease(d3.easeLinear)
+                .style('stroke-dashoffset', 0);
+
+            // 圆点动画
+            d3.select("#line")
+                .selectAll('.node')
+                .style('stroke-width', 0)
+                .transition()
+                .duration(1000)
+                .delay(function (d, i) {
+                    return i * 100
+                })
+                .ease(d3.easeLinear)
+                .style('stroke-width', 1)
+
+            // 链接：https://juejin.cn/post/7002839463541882910
+
+            // 绘制X坐标轴
+            var xAxisParse = d3.timeFormat("%b");
+            // 绘制X坐标轴
+            var xAxis = d3.axisBottom(xScaleLine)
+                .tickFormat((d)=>xAxisParse(d)); //底部的轴
+            xAxis.ticks(12); // 限制tick个数为3
+            d3.select("#xAxisLine")
+                .transition()
+                .duration(500)
+                .ease(d3.easeLinear)
+                .call(xAxis)
+                .attr("transform", "translate(0," + yScaleLine.range()[1] + ")")
+                ;
+
+            // 绘制Y坐标轴
+            var yAxis = d3.axisLeft(yScaleLine); //左边的轴
+            d3.select("#yAxisLine")
+                .transition()
+                .duration(500)
+                .ease(d3.easeLinear)
+                .call(yAxis)
+                .attr("transform", "translate(" + xScaleLine.range()[0] + ")", 0)
+                ;
+            // .attr("font-size", 10.5);
+        }
+
+        function drawLineChart() {
+            //--- 定义水平方向、垂直方向、颜色比例尺
+            // 定义水平方向比例尺
+            var xScaleLine = d3.scaleTime()
+                .domain(d3.extent(lineData, d => d.date)) // set the input domain
+                .range([linechartPadding.left, 500]);
+
+            // 定义垂直方向比例尺
+            var yScaleLine = d3.scaleLinear()
+                .domain([d3.max(lineData, d => d.unit), 0]) // 得到所有类别信息
+                .rangeRound([linechartPadding.top, lineChartHeight - linechartPadding.bottom]); // set the output range;
+
+
+            //--- 绘制柱状图
+            // 绘制柱状图前的透明矩形块，并为其添加交互
+            var referenceRectLine = lineChart.insert("g", "#line").append("rect")
+                .attr("width", xScaleLine.range()[1] - xScaleLine.range()[0])
+                .attr("height", yScaleLine.range()[1] - yScaleLine.range()[0])
+                .attr("x", xScaleLine.range()[0])
+                .attr("y", yScaleLine.range()[0])
+                .attr("fill", "gray")
+                .attr("opacity", "0");
+
+            referenceRectLine.on("click", function (event) {
+                d3.select("#line").selectAll('.node').style("stroke", "#FCB066")
+                    .style('stroke-width', '1')
+                    .attr('r', 4);
+                updateBarAndPieFromLine("all");
+            });
+
+            // 绘制条形图
+            var lines = d3.line()
+                .x(d => xScaleLine(d.date))
+                .y(d => yScaleLine(d.unit))
+                .curve(d3.curveCardinal);
+
+            d3.select("#line")
+                .append("path")
+                .datum(lineData)
+                .attr("fill", "none")
+                .attr("stroke", "#FCB066")
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-linecap", "round")
+                .attr("stroke-width", "4")
+                .attr("d", lines);
+
+            // 绘制节点
+            d3.select("#line")
+                .selectAll('.node')
+                .data(lineData)
+                .enter().append('circle')
+                .attr('class', 'node')
+                .attr('cx', d => xScaleLine(d.date))
+                .attr('cy', d => yScaleLine(d.unit))
+                .attr('r', 4) // 设置节点半径
+                .attr('fill', 'white')// 设置节点填充颜色
+                .attr('stroke', '#FCB066')
+                .append('title')
+                .text(function (d) { // 更新每个州的title信息。
+                    return "Units: " + d3.format(".0f")(d.unit);
+                });
+
+            d3.select("#line")
+                .select('path')
+                .attr('stroke', '#FCB066')
+                .style('stroke-dasharray', function () {
+                    return d3.select(this).node().getTotalLength()
+                })
+                .style('stroke-dashoffset', function () {
+                    return d3.select(this).node().getTotalLength()
+                })
+                .transition()
+                .duration(1000)
+                .delay(100)
+                .ease(d3.easeLinear)
+                .style('stroke-dashoffset', 0);
+
+            // 圆点动画
+            d3.select("#line")
+                .selectAll('.node')
+                .style('stroke-width', 0)
+                .transition()
+                .duration(1000)
+                .delay(function (d, i) {
+                    return i * 100
+                })
+                .ease(d3.easeLinear)
+                .style('stroke-width', 1)
+
+            var nodes = d3.select("#line").selectAll('.node');
+            // 为所有节点添加交互响应
+            nodes.on("click", function (event, d) { //注意click事件需要添加event参数
+                nodes.style("stroke", "#FCB066")
+                    .style('stroke-width', '1')
+                    .attr('r', 4);
+                d3.select(this)
+                    .style("stroke", "red")
+                    .style('stroke-width', '3')
+                    .attr('r', 6);
+                updateBarAndPieFromLine(d.date);
+            })
+
+            var xAxisParse = d3.timeFormat("%b");
+            // 绘制X坐标轴
+            var xAxis = d3.axisBottom(xScaleLine)
+                .tickFormat((d)=>xAxisParse(d)); //底部的轴
+            xAxis.ticks(12); // 限制tick个数为3
+            d3.select("#xAxisLine")
+                .call(xAxis)
+                .attr("transform", "translate(0," + yScaleLine.range()[1] + ")")
+                ;
+
+            // 绘制Y坐标轴
+            var yAxis = d3.axisLeft(yScaleLine); //左边的轴
+            d3.select("#yAxisLine")
+                .call(yAxis)
+                .attr("transform", "translate(" + xScaleLine.range()[0] + ")", 0)
+                ;
+        }
+
+
+
+        // -------------------------------------------------------pie chart---------------------------------------------------------------------------------------
+        // 定义SVG
+        var pieChartWidth = 500;
+        var pieChartHeight = 400;
+
+        // 读入数据并绘制函数
+        var pieData = []; //强制要求是array类型，方便后面调用push函数
+        var nestByFactory;
+
+        // 绘图与更新所需变量
+        var pieColor;
+        var arc;
+        var pieLayout;
+
+        d3.json("/get_data_for_visualization").then(function (data) {
+            data = JSON.parse(data)
+
+
+            // 按类别重新组织数据
+            // 使用groups形成一个二维数组，二维数组上进行数据操作，注意与group的区别，group形成MAP数据
+            nestByFactory = d3.groups(data, function (d) {
+                return d.factory;
+            })
+
+            nestByFactory.forEach(function (item, index, array) { //第一层循环,读取0-16个数组
+                var sumUnit = 0;
+                item[1].forEach(function (d) { //第二层循环，对数值累加
+                    sumUnit += d.defect_unit;
+                })
+                pieData.push({ //将加过的结果放入bardata中
+                    factory: item[0],
+                    unit: sumUnit
+                });
+            })
+
+            pieData = d3.filter(pieData, (d) => d.factory != null)
+            // 转换为映射表形式，方便后续快速检索指定类别
+            nestByFactory = d3.group(data, d => d.factory);
+
+            console.log("nestByFactory", nestByFactory);
+            console.log("draw pie(pieData)", pieData);
+
+            drawPieChart(); // 根据barData来绘制柱状图
+        });
+
+        function updateBarAndMapFromPie(factory) {
+            if (factory == "all") {
+                // d3.select(".categories").select("h2").text("Categories: sales and profit");
+                updateBarByNewProfitAndSales(barData);
+
+                // d3.select(".area").select("h2").text("Area: profits of all segments");
+                updateLineByNewItem(lineData); // 这里假定profitInfoMap为外部变量，记录每个州所有产品总利润。
+            } else {
+                //---updateBar
+                // d3.select(".categories").select("h2").text("Categories: sales and profit of " + factory);
+                var curInfoBar = [];
+                // 得到对应segment数据，并按类别重新组织数据
+                // 使用groups形成一个二维数组，二维数组上进行数据操作，注意与group的区别，group形成MAP数据
+                var curInfo = d3.groups(nestByFactory.get(factory), function (d) {
+                    return d.item;
+                })
+                console.log("curInfo", curInfo)
+
+                curInfo.forEach(function (item, index, array) { //第一层循环,读取0-16个数组
+                    var sumUnit = 0;
+                    item[1].forEach(function (d) { //第二层循环，对数值累加
+                        sumUnit += d.defect_unit;
+                    })
+                    curInfoBar.push({ //将加过的结果放入bardata中
+                        item: item[0],
+                        unit: sumUnit
+                    });
+                })
+                console.log("curInfoBar", curInfoBar)
+                updateBarByNewProfitAndSales(curInfoBar);
+
+                //---updateLine
+                // d3.select(".area").select("h2").text("Area: profits of " + factory);
+                // // 得到该产品在每个州的销售信息
+                data = nestByFactory.get(factory)
+                data.forEach(d => {
+                    d.month = d.contact_date.split("-")[1] + "/" + d.contact_date.split("-")[0];
+                });
+                // 格式化日期为月份
+                const parseDate = d3.timeParse('%m/%Y');
+                data.forEach(d => {
+                    d.month = parseDate(d.month);
+                });
+                var curInfo = d3.group(data, d => d.month);
+
+                console.log("curInfo", curInfo)
+
+                var curInfoLine = [];
+                curInfo.forEach(function (value, key, map) {
+                    console.log(value)
+                    var sumUnit = 0;
+                    value.forEach(function (d) { //第二层循环，对数值累加
+                        sumUnit += d.defect_unit;
+                    })
+                    curInfoLine.push({ //将加过的结果放入bardata中
+                        date: key,
+                        unit: sumUnit
+                    });
+                });
+
+                console.log("curInfoLine", curInfoLine)
+                // curInfoMap = d3.group(curInfoMap, d => d.state);
+                updateLineByNewItem(curInfoLine);
+            }
+
+        }
+
+        function updatePieByNewSales(curData) {
+
+            console.log('curData', curData)
+            // 得到所有产品类别
+            var AllFactories = [];
+            d3.select("#Other").selectAll(".legend").select("text").each(function () {
+                d3.select(this).text(function (d) {
+                    AllFactories.push(d);
+                    return d;
+                })
+            });
+
+            var data;
+            if (curData.length != 12) {
+                //--- 某些州在某些产品上没有数据，补全数据
+
+                // 得到当前数据中有的产品类别
+                var curFactories = d3.map(curData, d => d.factory);
+
+                // 遍历，若当前数据没有某一类产品，push，并将profit和sales都置0
+                for (var i = 0; i < AllFactories.length; i++) {
+                    if (curFactories.includes(AllFactories[i]) == false)
+                        curData.push({
+                            factory: AllFactories[i],
+                            unit: 0
+                        });
+                };
+            };
+
+            //排序curdata
+            curData.sort(function (a, b) {
+                return AllFactories.indexOf(a.factory) - AllFactories.indexOf(b.factory);
+            })
+            curData = d3.rollup(curData, values => values[0].unit, d => d.factory);
+            data = curData.values();
+
+            // 定义svg画布 
+            d3.select("#Other").selectAll(".arc")
+                .data(pieLayout(data)) // 绑定转换后的饼图布局数据
+                .transition()
+                .duration(500)
+                .select("path")
+                .attrTween("d", function (d) {
+                    var i = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = i(t);
+                        return arc(d);
+                    };
+                })
+                .attr("fill", function (d, i) {
+                    return pieColor(i); // 根据颜色映射表来得到填充颜色 
+                });
+
+            // 更新每个弧的title信息
+            d3.select("#Other").selectAll(".arc").select("title")
+                .text(function (d) {
+                    return "unit: " + d3.format(".0f")(d.data);
+                });
+
+        }
+
+        function drawPieChart() {
+            data = d3.rollup(
+                pieData,
+                values => values[0].unit,
+                d => d.factory
+            );
+            pieLayout = d3.pie();
+
+            // 定义弧生成器
+            var outerRadius = pieChartWidth / 3;
+            var innerRadius = 100;
+            arc = d3.arc()
+                .innerRadius(100)
+                .outerRadius(outerRadius)
+                .cornerRadius(10)
+
+            // 颜色映射表
+            pieColor = d3.scaleOrdinal(d3.schemePaired);
+
+            d3.select("#Other")
+                .attr("width", pieChartWidth)
+                .attr("height", pieChartHeight);
+            // 定义svg画布 
+            var pieChart = d3.select("#Other")
+                .attr("width", pieChartWidth)
+                .attr("height", pieChartHeight);
+
+            var arcs = pieChart.selectAll("g")
+                .data(pieLayout(data.values())) // 绑定转换后的饼图布局数据
+                .enter()
+                .append("g")
+                .attr("class", "arc")
+                .attr("transform", `translate(${pieChartWidth / 2},${pieChartHeight / 2})`); // 平移到画布中心 
+
+            arcs.append("path")
+                .attr("fill", function (d, i) {
+                    return pieColor(i); // 根据颜色映射表来得到填充颜色 
+                })
+                .attr("d", arc); // 生成弧度 
+
+            arcs.append("title")
+                .text(function (d) { // 更新每个州的title信息。
+                    return "unit: " + d3.format(".0f")(d.data);
+                });
+
+            // 为所有弧形添加交互响应
+            arcs.on("click", function (event, d) { //注意click事件需要添加event参数
+                arcs.style("stroke", "none");
+                d3.select(this).style("stroke", "red");
+                var targetColor = d3.select(this).select("path").attr("fill");
+                var Alllegends = pieChart.selectAll(".legend");
+                var targetFactory;
+                Alllegends.each(function () {
+                    if (d3.select(this).select("rect").attr("fill") == targetColor)
+                        d3.select(this).select("text").text(function (d) {
+                            targetFactory = d;
+                            return d;
+                        })
+                });
+                updateBarAndMapFromPie(targetFactory);
+            })
+
+            // 绘制饼图前的透明矩形块
+            var referencePie = pieChart.insert("g", ".arc").append("rect")
+                .attr("width", pieChartWidth)
+                .attr("height", pieChartHeight)
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("fill", "blue")
+                .attr("opacity", "0")
+                .attr("display", 'flex');
+            // 为透明矩形块添加交互
+            referencePie.on("click", function (event) {
+                arcs.style("stroke", "none");
+                updateBarAndMapFromPie("all");
+            });
+
+            // --- 加个图例
+            //初始化图例，将data.keys()与图例绑定
+            var legend = pieChart.selectAll(".legend")
+                .data(data.keys())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function (d, i) {
+                    return "translate(0," + (i * 20 + 200) + ")";
+                });
+
+            //绘制文字后方的颜色框或线
+            legend.append("rect")
+                .attr("x", pieChartWidth - 50) //width是svg的宽度，x属性用来调整位置
+                .attr("y", 8)
+                .attr("width", 40)
+                .attr("height", 10)
+                .attr("fill", function (d, i) {
+                    return pieColor(i)
+                });
+
+            //绘制图例文字
+            legend.append("text")
+                .attr("x", pieChartWidth - 55)
+                // .attr("x", (width / 40) * 39)
+                .attr("y", 15)
+                .style("text-anchor", "end") //样式对齐
+                .text(function (d) {
+                    return d;
+                });
+
+
+        }
+    </script>
+
+</body>
+
+</html>

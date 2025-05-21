@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- update log:
+- 2025/2/25, change cdn. into fastly. in the script area, owing to the cdn server cannot be accessed(connection time out) -->
+
+<head>
+    <title>China Sales Portal</title>
+    <meta charset="UTF-8">
+    <!-- <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://fastly.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css">
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/bootstrap-table.min.css">
+
+    <!-- <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.1/dist/extensions/sticky-header/bootstrap-table-sticky-header.css"> -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/extensions/sticky-header/bootstrap-table-sticky-header.css">
+
+    <!-- <ink rel="stylesheet"
+        href="https: //cdnjs.cloudflare.com/ajax/libs/bootstrap-table-fixed-header/1.4.0/bootstrap-table-fixed-header.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/extensions/filter-control/bootstrap-table-filter-control.min.css"> -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/extensions/filter-control/bootstrap-table-filter-control.min.css">
+
+    <!-- <link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css">
+    <style>
+        /* CSS 样式，使图片自适应大小 */
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .button-container {
+            display: flex;
+            align-items: center;
+        }
+
+        /* 校验失败的元素样式 */
+
+        input:invalid {
+            border-color: #900;
+            background-color: #fdd;
+        }
+
+        input:focus:invalid {
+            outline: none;
+        }
+
+        /* 错误消息的样式 */
+
+        .error {
+            width: 100%;
+            padding: 0;
+            font-size: 80%;
+            color: white;
+            background-color: #900;
+            border-radius: 0 0 5px 5px;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .error.active {
+            padding: 0.3em;
+        }
+
+
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .bootstrap-table .fixed-table-container .fixed-table-body {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .px-3 {
+            background-color: #C61C2C
+        }
+
+        .contact_date_start_div,
+        .contact_date_end_div {
+            position: relative;
+        }
+
+        .placeholder-text {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+            pointer-events: none;
+        }
+
+        #contact_date_start,
+        #contact_date_end {
+            color: white
+        }
+
+        /* CSS样式 */
+        video::-webkit-media-controls {
+            height: 100%;
+            z-index: 100;
+
+            /* 设置控制条的高度为 30px */
+        }
+
+        video::-webkit-media-controls-panel {
+            height: 100%;
+            z-index: 100;
+            /* 设置控制条的高度为 30px */
+        }
+
+        video::-webkit-media-slider {
+            height: 1px;
+            z-index: 100;
+            /* 设置滑块的高度为 4px */
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .carousel-control-prev {
+            left: 10px;
+        }
+
+        .carousel-control-next {
+            right: 10px;
+        }
+
+        .carousel-indicators {
+            margin-bottom: 0%;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .carousel-caption {
+            opacity: 0.5;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="px-3 py-2">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/"
+                        class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <img src="../static/svg/logo.svg" title="Radio Flyer" alt="Radio Flyer" width="250" height="21">
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a href="/" class="nav-link text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi d-block mx-auto mb-1 bi-house-door" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z">
+                                    </path>
+                                </svg>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/visualization" class="nav-link text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi d-block mx-auto mb-1 bi-speedometer2" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4M3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707M2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10m9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5m.754-4.246a.39.39 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.39.39 0 0 0-.029-.518z" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A8 8 0 0 1 0 10m8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3" />
+                                </svg>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi d-block mx-auto mb-1 bi-table" viewBox="0 0 16 16">
+                                    <path
+                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z" />
+                                </svg>
+                                Records
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi d-block mx-auto mb-1 bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                                </svg>
+                                User
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div id="toolbar">
+                <div class="d-inline-flex">
+                    <div class="contact_date_start_div">
+                        <input type="date" class="w-10 form-control" id="contact_date_start" name="contact_date_start">
+                        <label for="contact_date_start" class="placeholder-text text-secondary"
+                            id="placeholder_for_contact_date_start">Start Date</label>
+                    </div>
+                    <p class="px-2 my-2 text-secondary">—</p>
+                    <div class="contact_date_end_div">
+                        <input type="date" class="w-10 form-control " id="contact_date_end" name="contact_date_end">
+                        <label for="contact_date_end" class="placeholder-text text-secondary"
+                            id="placeholder_for_contact_date_end">End
+                            Date</label>
+                    </div>
+                    <button type="button" class="btn " id="btnDateSearch" title="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <table id="table" data-buttons="buttons" data-multiple-select-row="true" data-click-to-select="true"
+                data-pagination="true" data-show-extended-pagination="true" data-filter-control="true"
+                data-sort-select-options="true" data-show-search-clear-button="true"
+                data-buttons-class="outline-secondary" data-show-export="true" data-height="950" data-search="true"
+                data-toolbar="#toolbar" data-query-params="queryParams" data-sticky-header="true" data-fixed-scroll="true"
+                data-page-list="[10, 25, 50, 100, 200, All]" data-export-data-type="all">
+                <thead>
+                    <tr>
+                        <th data-checkbox="true">RMA#</th>
+                        <th data-field="rma_">RMA#</th>
+                        <th data-field="contact_date" data-filter-control="select" data-sortable="true">Contact Date
+                        </th>
+                        <th data-field="purchase_date" data-filter-control="select">Purchase Date</th>
+                        <th data-field="contact_id">Contact ID</th>
+                        <th data-field="source_of_purchase" data-filter-control="select">Source of purchase</th>
+                        <th data-field="factory" data-filter-control="select" editable='true'>Factory</th>
+                        <th data-field="item_" data-filter-control="select">Item#</th>
+                        <th data-field="complaint_category_class_i" data-filter-control="select">Complaint Category
+                            Class l
+                        </th>
+                        <th data-field="complaint_category_class_ii">Complaint Category Class ll</th>
+                        <th data-field="defect_description" data-filter-control="input">Defect Description</th>
+                        <th data-field="defect_unit">Defect Unit</th>
+                        <th data-field="name">Name</th>
+                        <th data-field="number">Phone NO.</th>
+                        <th data-field="address" data-filter-control="input">Address</th>
+                        <th data-field="parts_no">Parts NO.</th>
+                        <th data-field="action_to_be_taken">Action to take</th>
+                        <th data-field="courier_">Courier</th>
+                        <th data-field="tracking_" data-filter-control="input">Tracking#</th>
+                        <th data-field="pic_name" data-visible="false"></th>
+                        <th data-field="video_name" data-visible="false"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for r in records %}
+                    <tr>
+                        <td></td>
+                        <td>{{ r.rma_ }}</td>
+                        <td>{{ r.contact_date or '-'}}</td>
+                        <td>{{ r.purchase_date or '-' }}</td>
+                        <td>{{ r.contact_id or '-' }}</td>
+                        <td>{{ r.source_of_purchase or '-' }}</td>
+                        <td>{{ r.factory or '-' }}</td>
+                        <td>{{ r.item_ or '-' }}</td>
+                        <td>{{ r.complaint_category_class_i or '-' }}</td>
+                        <td>{{ r.complaint_category_class_ii or '-' }}</td>
+                        <td>{{ r.defect_description or '-'}}</td>
+                        <td>{{ r.defect_unit or '-' }}</td>
+                        <td>{{ r.name or '-' }}</td>
+                        <td>{{ r.number or '-' }}</td>
+                        <td>{{ r.address or '-' }}</td>
+                        <td>{{ r.parts_no or '-' }}</td>
+                        <td>{{ r.action_to_be_taken or '-' }}</td>
+                        <td>{{ r.courier_ or '-' }}</td>
+                        <td>{{ r.tracking_ or '-' }}</td>
+                        <td>{{r.pic_name or ''}}</td>
+                        <td>{{r.video_name or ''}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 模态框 -->
+        <!-- 1.显示图片的模态框-->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div id="mediaCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- 动态添加指示器和图片/视频 -->
+                            <div class="carousel-indicators"></div>
+                            <div class="carousel-inner"></div>
+                            <button class="carousel-control-prev" data-bs-target="#mediaCarousel" type="button"
+                                data-bs-slide="prev">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="bi bi-chevron-left text-secondary	" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                                </svg>
+                                <!-- <span class="visually-hidden">Previous</span> -->
+                            </button>
+                            <button class="carousel-control-next" data-bs-target="#mediaCarousel" type="button"
+                                data-bs-slide="next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="bi bi-chevron-right text-secondary" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                                </svg>
+                                <!-- <span class="visually-hidden">Next</span> -->
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2.添加记录的模态框-->
+        <div id="addModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- 模态框内容 -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add A New Record</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            id="addCancelBtn1"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 表单元素 -->
+                        <form class="needs-validation" id="addRowForm" method="post" novalidate>
+                            <div class="form-group">
+                                <label for="rma">RMA:</label>
+                                <input type="text" class="form-control" id="rma" name="rma"
+                                    placeholder="year(2 bits)+number(6 bits)" maxlength="8" pattern="\d{8}" disabled
+                                    required>
+                                <div class="invalid-feedback">Format error, please re-enter!</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_date">Contact Date:</label>
+                                <input type="date" class="form-control" id="contact_date" name="contact_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="purchase_date">Purchase Date:</label>
+                                <input type="date" class="form-control" id="purchase_date" name="purchase_date">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_id">Contact ID:</label>
+                                <input type="text" class="form-control" id="contact_id" name="contact_id">
+                            </div>
+                            <div class="form-group mt-1">
+                                <label for="source_of_purchase">Source of purchase:</label>
+                                <select class="form-select " id="source_of_purchase" name="source_of_purchase"
+                                    style="width: 100%;" dir="ltr">
+                                </select>
+                                <div class="input-group my-1">
+                                    <button class="btn btn-outline-secondary" type="button" id="btnNewSource">New Source
+                                        </Source></button>
+                                    <input type="text" class="form-control" id="inputNewSource"
+                                        aria-describedby="btnNewSource" disabled>
+                                </div>
+
+                            </div>
+                            <div class="form-group mt-1">
+                                <label for="factory">Factory:</label>
+                                <select class="form-select" id="factory" name="factory" style="width: 100%;" dir="ltr">
+                                </select>
+                                <div class="input-group my-1">
+                                    <button class="btn btn-outline-secondary" type="button" id="btnNewFactory">New
+                                        Factory</button>
+                                    <input type="text" class="form-control" id="inputNewFactory"
+                                        aria-describedby="btnNewFactory" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="item">Item#:</label>
+                                <input type="text" class="form-control" id="item" name="item" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="complaint_category_class_i">Complaint Category Class l:</label>
+                                <select class="form-select" id="complaint_category_class_i"
+                                    name="complaint_category_class_i" style="width: 100%;" dir="ltr">
+                                    <option value="Product Quality">Product Quality</option>
+                                    <option value="Customer Reason">Customer Reason</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" id="complaint_category_class_i" name="complaint_category_class_i"> -->
+                            </div>
+                            <div class="form-group">
+                                <label for="complaint_category_class_ii">Complaint Category Class ll:</label>
+                                <input type="text" class="form-control" id="complaint_category_class_ii"
+                                    name="complaint_category_class_ii">
+                            </div>
+                            <div class="form-group">
+                                <label for="defect_description">Defect Description:</label>
+                                <input type="text" class="form-control" id="defect_description"
+                                    name="defect_description">
+                            </div>
+                            <div class="form-group">
+                                <label for="defect_description_pic">Defect Pic:</label>
+                                <input type="file" class="form-control" id="defect_description_pic"
+                                    name="defect_description_pic" accept="image/*,video/*" multiple>
+                            </div>
+                            <div class="form-group">
+                                <label for="defect_unit">Defect Unit:</label>
+                                <input type="number" class="form-control" id="defect_unit" name="defect_unit" min="0"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="number">Phone NO.:</label>
+                                <input type="text" class="form-control" id="number" name="number">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address:</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                            <div class="form-group">
+                                <label for="parts_no">Parts NO.:</label>
+                                <input type="text" class="form-control" id="parts_no" name="parts_no">
+                            </div>
+                            <div class="form-group">
+                                <label for="action_to_be_taken">Action to take:</label>
+                                <input type="text" class="form-control" id="action_to_be_taken"
+                                    name="action_to_be_taken">
+                            </div>
+                            <div class="form-group">
+                                <label for="courier">Courier:</label>
+                                <input type="text" class="form-control" id="courier" name="courier">
+                            </div>
+                            <div class="form-group">
+                                <label for="tracking">Tracking#:</label>
+                                <input type="text" class="form-control" id="tracking" name="tracking">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" id="saveAddBtn">Save</button>
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal"
+                                    id="addCancelBtn2">Close</button>
+                            </div>
+                            <!-- 其他表单元素 -->
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3.修改记录的模态框-->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="editModalLabel">Edit Row</h5> -->
+                        <h4 class="modal-title">Edit A Record</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="needs-validation" id="editRowForm" method="post" novalidate>
+                            <div class="mb-3">
+                                <label for="edit-rma">RMA:</label>
+                                <input type="text" class="form-control" id="edit-rma" name="edit-rma"
+                                    placeholder="year(2 bits)+number(6 bits)" maxlength="8" pattern="\d{8}"
+                                    autocomplete="off" disabled>
+                                <div class="invalid-feedback">Format error, please re-enter!</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-contact_date">Contact Date:</label>
+                                <input type="date" class="form-control" id="edit-contact_date" name="edit-contact_date"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-purchase_date">Purchase Date:</label>
+                                <input type="date" class="form-control" id="edit-purchase_date"
+                                    name="edit-purchase_date" autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-contact_id">Contact ID:</label>
+                                <input type="text" class="form-control" id="edit-contact_id" name="edit-contact_id"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-source_of_purchase">Source of purchase:</label>
+                                <select class="form-select " id="edit-source_of_purchase" name="edit-source_of_purchase"
+                                    style="width: 100%;">
+                                </select>
+                                <!-- <input type="text" class="form-control" id="source_of_purchase" name="source_of_purchase"> -->
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-factory">Factory:</label>
+                                <select class="form-select" id="edit-factory" name="edit-factory" style="width: 100%;">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-item">Item#:</label>
+                                <input type="text" class="form-control" id="edit-item" name="edit-item"
+                                    autocomplete="off" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-complaint_category_class_i">Complaint Category Class l:</label>
+                                <select class="form-select" id="edit-complaint_category_class_i"
+                                    name="edit-complaint_category_class_i" style="width: 100%;" autocomplete="off">
+                                    <option value="Product Quality">Product Quality</option>
+                                    <option value="Customer Reason">Customer Reason</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-complaint_category_class_ii">Complaint Category Class ll:</label>
+                                <input type="text" class="form-control" id="edit-complaint_category_class_ii"
+                                    name="edit-complaint_category_class_ii" autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-defect_description">Defect Description:</label>
+                                <input type="text" class="form-control" id="edit-defect_description"
+                                    name="edit-defect_description" autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-defect_description_pic-after">Defect Pic:</label>
+                                <div class="input-group mb-3">
+                                    <textarea class="form-control" id="edit-defect_description_pic-before"
+                                        name="edit-defect_description_pic-before" aria-describedby="btnPreview"
+                                        disabled></textarea>
+                                    <button class="btn btn-outline-secondary" type="button" id="btnPreview"
+                                        name="btnPreview" data-bs-toggle="modal"
+                                        data-bs-target="#imageModal">Preview</button>
+                                </div>
+                                <input type="file" class="form-control" id="edit-defect_description_pic-after"
+                                    name="edit-defect_description_pic-after" accept="image/*,video/*" multiple
+                                    autocomplete="off">
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-defect_unit">Defect Unit:</label>
+                                <input type="number" class="form-control" id="edit-defect_unit" name="edit-defect_unit"
+                                    min="0" autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-name">Name:</label>
+                                <input type="text" class="form-control" id="edit-name" name="edit-name"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-number">Phone NO.:</label>
+                                <input type="text" class="form-control" id="edit-number" name="edit-number"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-address">Address:</label>
+                                <input type="text" class="form-control" id="edit-address" name="edit-address"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-parts_no">Parts NO.:</label>
+                                <input type="text" class="form-control" id="edit-parts_no" name="edit-parts_no"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-action_to_be_taken">Action to take:</label>
+                                <input type="text" class="form-control" id="edit-action_to_be_taken"
+                                    name="edit-action_to_be_taken" autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-courier">Courier:</label>
+                                <input type="text" class="form-control" id="edit-courier" name="edit-courier"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-tracking">Tracking#:</label>
+                                <input type="text" class="form-control" id="edit-tracking" name="edit-tracking"
+                                    autocomplete="off">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" id="saveChangesButton">Save
+                                    Changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.upload file的模态框-->
+        <div id="uploadFileModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- 模态框内容 -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Records by Uploading File</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            id="addCancelBtn3"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 表单元素 -->
+                        <form class="needs-validation" id="addRowsForm" method="post" novalidate>
+                            
+                            <div class="form-group">
+                                <label for="file_uploaded">File:</label>
+                                <input type="file" class="form-control" id="file_uploaded"
+                                    name="file_uploaded" accept=".xlsx" required>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" id="saveUploadFileBtn">OK</button>
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal"
+                                    id="addCancelBtn4">Close</button>
+                            </div>
+                            <!-- 其他表单元素 -->
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Toast-->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3 
+    ">
+            <div id="messageToast" class="toast" role="status" aria-live="polite" aria-atomic="true"
+                data-bs-animation="true">
+
+                <div class="toast-body">
+                    toast 主体内的文本。
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script> -->
+    <script src="https://fastly.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+    <!-- <script src="{{url_for('static',filename='js/bootstrap.bundle.min.js')}}"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="https://fastly.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- <script src="{{url_for('static',filename='js/perfect-scrollbar.min.js')}}"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js"></script> -->
+    <script src="https://fastly.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js"></script>
+
+    <!-- <script src="{{url_for('static',filename='js/bootstrap-table.min.js')}}"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/bootstrap-table.min.js"></script> -->
+    <script src="https://fastly.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/bootstrap-table.min.js"></script>
+
+    <!-- <script src="{{url_for('static',filename='js/bootstrap-table-sticky-header.min.js')}}"></script> -->
+    <!-- <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js"></script> -->
+    <script
+        src="https://fastly.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js"></script>
+
+    <!-- <script src="{{url_for('static',filename='js/bootstrap-table-filter-control.min.js')}}"></script> -->
+    <!-- <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script> -->
+    <script
+        src="https://fastly.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+
+    <!-- <script src="{{url_for('static',filename='js/bootstrapValidator.min.js')}}"></script> -->
+    <!-- <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script> -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+
+    <!-- <script src="{{url_for('static',filename='js/bootstrap-table-export.min.js')}}"></script> -->
+    <!-- <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/extensions/export/bootstrap-table-export.min.js"></script> -->
+        <script
+            src="https://fastly.jsdelivr.net/npm/bootstrap-table@1.23.5/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <!-- <script src="{{url_for('static',filename='js/tableExport.min.js')}}"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.29.0/tableExport.min.js"></script> -->
+    <script src="https://fastly.jsdelivr.net/npm/tableexport.jquery.plugin@1.29.0/tableExport.min.js"></script>
+
+    <!-- <script src="{{url_for('static',filename='js/jquery.serializejson.min.js')}}"
+        integrity="sha256-IfgV2KWiEgB7xvdglzXFAPS6YIFJsZVdea1U7JLD49w=" crossorigin="anonymous"></script> -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/3.2.1/jquery.serializejson.min.js"></script>
+
+    <script>
+        let SERVERIPADDRESS = '192.168.123.29';
+        let saveAddBtnClicked = false;
+        let factoryAddBtnClicked = false;
+        let sourceAddBtnClicked = false;
+
+        var $table = $('#table')
+        var $remove = $('#remove')
+        var $add = $('#addRowBtn')
+        var originalDataDict = {}
+        var tableOptions;
+        var ps;
+
+        function buttons() {
+            return {
+                btnRefresh: {
+                    icon: 'bi-arrow-clockwise',
+                    event: function () {
+                        $table.bootstrapTable('refresh', { url: '/get-data' });
+                    },
+                    attributes: {
+                        title: 'Refresh table'
+                    }
+                },
+                btnAdd: {
+                    text: 'Add new row',
+                    icon: 'bi-plus-lg',
+                    event: function () {
+                        $.ajax({
+                            url: '/get_latest_rma',
+                            type: 'GET',
+                            success: function (data) {
+                                document.getElementById('rma').value = data['rma'];
+                            },
+                            error: function (xhr, status, error) {
+                                document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                                document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                                document.querySelector('#messageToast .toast-body').textContent = 'Error getting latest rma.';
+
+                                const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                toast.show()
+                            }
+                        });
+
+                        $.ajax({
+                            url: '/get_latest_unique_factory',
+                            type: 'GET',
+                            success: function (data) {
+                                const newFactoryOptionList = data['unique_factory'];
+                                const factorySelect = document.getElementById('factory');
+                                for (let i = 0; i < newFactoryOptionList.length; i++) {
+                                    const newOption = document.createElement('option');
+
+                                    if (newFactoryOptionList[i] === null) {
+                                        newOption.value = '-'; // 设置选项值
+                                        newOption.textContent = '-'; // 设置选项文本
+                                    }
+                                    else {
+                                        newOption.value = newFactoryOptionList[i]; // 设置选项值
+                                        newOption.textContent = newFactoryOptionList[i]; // 设置选项文本
+                                    }
+
+                                    factorySelect.appendChild(newOption); // 将新选项添加到 select 中
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                                document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                                document.querySelector('#messageToast .toast-body').textContent = 'Error getting latest unique factory.';
+
+                                const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                toast.show()
+                            }
+                        });
+
+                        $.ajax({
+                            url: '/get_latest_unique_source',
+                            type: 'GET',
+                            success: function (data) {
+                                const newSourceOptionList = data['unique_source'];
+                                const sourceSelect = document.getElementById('source_of_purchase');
+                                for (let i = 0; i < newSourceOptionList.length; i++) {
+                                    const newOption = document.createElement('option');
+
+                                    if (newSourceOptionList[i] === null) {
+                                        newOption.value = '-'; // 设置选项值
+                                        newOption.textContent = '-'; // 设置选项文本
+                                    }
+                                    else {
+                                        newOption.value = newSourceOptionList[i]; // 设置选项值
+                                        newOption.textContent = newSourceOptionList[i]; // 设置选项文本
+                                    }
+
+                                    sourceSelect.appendChild(newOption); // 将新选项添加到 select 中
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                                document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                                document.querySelector('#messageToast .toast-body').textContent = 'Error getting latest unique source.';
+
+                                const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                toast.show()
+                            }
+                        });
+
+                        $('#addModal').modal('show');
+                        saveAddBtnClicked = false;
+                        factoryAddBtnClicked = false;
+                        sourceAddBtnClicked = false;
+                    },
+                    attributes: {
+                        title: 'Add a new row'
+                    }
+                },
+                btnUpload: {
+                    text: 'Add new rows by uploading file',
+                    icon: 'bi-database-add',
+                    event: function () {
+                        $('#uploadFileModal').modal('show');
+                    },
+                    attributes: {
+                        title: 'Add new rows by uploading file'
+                    }
+                },
+                btnDelete: {
+                    text: 'Delete rows',
+                    icon: 'bi-dash-lg',
+                    event: function () {
+                        var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+                            return row.rma_
+                        })
+
+                        // 弹出警示框，点击确认后再进行删除
+                        var confirmDeleted = confirm('Are you sure to delete this(these) record(s)? RMA#: ' + JSON.stringify(ids))
+                        if (confirmDeleted) {
+                            // 发送数据到后端
+                            $.ajax({
+                                url: '/delete',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify(ids),
+                                success: function (data) {
+
+                                    document.getElementById('messageToast').classList.remove('bg-danger-subtle')
+                                    document.getElementById('messageToast').classList.add('bg-success-subtle')
+                                    document.querySelector('#messageToast .toast-body').textContent = data['message'];
+
+                                    const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                    toast.show()
+                                },
+                                error: function (xhr, status, error) {
+                                    // console.error('Error deleting data:', error);
+                                    document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                                    document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                                    document.querySelector('#messageToast .toast-body').textContent = 'Error deleting data';
+
+                                    const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                    toast.show()
+                                }
+                            });
+
+                            $table.bootstrapTable('remove', {
+                                field: 'rma_',
+                                values: ids
+                            })
+
+                            $('#btnDelete').prop('disabled', true)
+                        }
+                    },
+                    attributes: {
+                        id: 'btnDelete',
+                        title: 'Delete row(s)',
+                        disabled: true
+                    }
+                },
+                btnEdit: {
+                    text: 'Edit a row',
+                    icon: 'bi-pen',
+                    event: function () {
+                        console.log($table.bootstrapTable('getSelections')[0])
+                        $.ajax({
+                            url: '/get_latest_unique_factory',
+                            type: 'GET',
+                            async:false,
+                            success: function (data) {
+                                const newFactoryOptionList = data['unique_factory'];
+                                const factorySelect = document.getElementById('edit-factory');
+                                for (let i = 0; i < newFactoryOptionList.length; i++) {
+                                    const newOption = document.createElement('option');
+
+                                    if (newFactoryOptionList[i] === null) {
+                                        newOption.value = '-'; // 设置选项值
+                                        newOption.textContent = '-'; // 设置选项文本
+                                    }
+                                    else {
+                                        newOption.value = newFactoryOptionList[i]; // 设置选项值
+                                        newOption.textContent = newFactoryOptionList[i]; // 设置选项文本
+                                    }
+
+                                    factorySelect.appendChild(newOption); // 将新选项添加到 select 中
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                                document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                                document.querySelector('#messageToast .toast-body').textContent = 'Error getting latest unique factory.';
+
+                                const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                toast.show()
+                            }
+                        });
+
+                        $.ajax({
+                            url: '/get_latest_unique_source',
+                            type: 'GET',
+                            async:false,
+                            success: function (data) {
+                                const newSourceOptionList = data['unique_source'];
+                                const sourceSelect = document.getElementById('edit-source_of_purchase');
+                                for (let i = 0; i < newSourceOptionList.length; i++) {
+                                    const newOption = document.createElement('option');
+
+                                    if (newSourceOptionList[i] === null) {
+                                        newOption.value = '-'; // 设置选项值
+                                        newOption.textContent = '-'; // 设置选项文本
+                                    }
+                                    else {
+                                        newOption.value = newSourceOptionList[i]; // 设置选项值
+                                        newOption.textContent = newSourceOptionList[i]; // 设置选项文本
+                                    }
+
+                                    sourceSelect.appendChild(newOption); // 将新选项添加到 select 中
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                                document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                                document.querySelector('#messageToast .toast-body').textContent = 'Error getting latest unique source.';
+
+                                const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                toast.show()
+                            }
+                        });
+
+
+                        // 获得各值并打开modal
+                        document.getElementById('edit-rma').value = $table.bootstrapTable('getSelections')[0].rma_;
+                        document.getElementById('edit-contact_date').value = $table.bootstrapTable('getSelections')[0].contact_date;
+                        document.getElementById('edit-purchase_date').value = $table.bootstrapTable('getSelections')[0].purchase_date;
+                        document.getElementById('edit-contact_id').value = $table.bootstrapTable('getSelections')[0].contact_id;
+                        // console.log("document.getElementById('edit-source_of_purchase'):", document.getElementById('edit-source_of_purchase'))
+                        target_sop=$table.bootstrapTable('getSelections')[0].source_of_purchase;
+                        if(target_sop.includes('&#39;'))
+                            target_sop=target_sop.replace('&#39;',"'");
+                        document.getElementById('edit-source_of_purchase').value = target_sop;
+                        document.getElementById('edit-factory').value = $table.bootstrapTable('getSelections')[0].factory;
+                        document.getElementById('edit-item').value = $table.bootstrapTable('getSelections')[0].item_;
+                        document.getElementById('edit-complaint_category_class_i').value = $table.bootstrapTable('getSelections')[0].complaint_category_class_i;
+                        document.getElementById('edit-complaint_category_class_ii').value = $table.bootstrapTable('getSelections')[0].complaint_category_class_ii;
+                        document.getElementById('edit-defect_description').value = $table.bootstrapTable('getSelections')[0].defect_description;
+                        document.getElementById('edit-defect_unit').value = $table.bootstrapTable('getSelections')[0].defect_unit;
+                        let valueBefore = $table.bootstrapTable('getSelections')[0].pic_name + ';' + $table.bootstrapTable('getSelections')[0].video_name;
+                        let valueBeforeList = valueBefore.split(';');
+                        document.getElementById('edit-defect_description_pic-before').value = valueBeforeList.join('\n');
+                        document.getElementById('edit-defect_description_pic-before').rows = valueBeforeList.length;
+                        document.getElementById('edit-defect_description_pic-after').value = '';
+                        document.getElementById('edit-name').value = $table.bootstrapTable('getSelections')[0].name;
+                        document.getElementById('edit-number').value = $table.bootstrapTable('getSelections')[0].number;
+                        document.getElementById('edit-address').value = $table.bootstrapTable('getSelections')[0].address;
+                        document.getElementById('edit-parts_no').value = $table.bootstrapTable('getSelections')[0].parts_no;
+                        document.getElementById('edit-action_to_be_taken').value = $table.bootstrapTable('getSelections')[0].action_to_be_taken;
+                        document.getElementById('edit-courier').value = $table.bootstrapTable('getSelections')[0].courier_;
+                        document.getElementById('edit-tracking').value = $table.bootstrapTable('getSelections')[0].tracking_;
+
+
+
+                        console.log("originalDataDict")
+                        console.log(originalDataDict)
+                        originalDataDict['rma'] = $table.bootstrapTable('getSelections')[0].rma_;
+                        originalDataDict['contact_date'] = $table.bootstrapTable('getSelections')[0].contact_date;
+                        originalDataDict['purchase_date'] = $table.bootstrapTable('getSelections')[0].purchase_date != '-' ? $table.bootstrapTable('getSelections')[0].purchase_date : '';
+                        originalDataDict['contact_id'] = $table.bootstrapTable('getSelections')[0].contact_id;
+                        originalDataDict['source_of_purchase'] = $table.bootstrapTable('getSelections')[0].source_of_purchase;
+                        originalDataDict['factory'] = $table.bootstrapTable('getSelections')[0].factory;
+                        originalDataDict['item'] = $table.bootstrapTable('getSelections')[0].item_;
+                        originalDataDict['complaint_category_class_i'] = $table.bootstrapTable('getSelections')[0].complaint_category_class_i;
+                        originalDataDict['complaint_category_class_ii'] = $table.bootstrapTable('getSelections')[0].complaint_category_class_ii;
+                        originalDataDict['defect_description'] = $table.bootstrapTable('getSelections')[0].defect_description;
+                        originalDataDict['defect_description_pic'] = $table.bootstrapTable('getSelections')[0].pic_name + ';' + $table.bootstrapTable('getSelections')[0].video_name;
+                        originalDataDict['defect_unit'] = $table.bootstrapTable('getSelections')[0].defect_unit;
+                        originalDataDict['name'] = $table.bootstrapTable('getSelections')[0].name;
+                        originalDataDict['number'] = $table.bootstrapTable('getSelections')[0].number;
+                        originalDataDict['address'] = $table.bootstrapTable('getSelections')[0].address;
+                        originalDataDict['parts_no'] = $table.bootstrapTable('getSelections')[0].parts_no;
+                        originalDataDict['action_to_be_taken'] = $table.bootstrapTable('getSelections')[0].action_to_be_taken;
+                        originalDataDict['courier'] = $table.bootstrapTable('getSelections')[0].courier_;
+                        originalDataDict['tracking'] = $table.bootstrapTable('getSelections')[0].tracking_;
+                        console.log(originalDataDict)
+
+
+                        if (($table.bootstrapTable('getSelections')[0].pic_name === '') & ($table.bootstrapTable('getSelections')[0].video_name === ''))
+                            $('#btnPreview').prop('disabled', true)
+                        else {
+                            $('#btnPreview').prop('disabled', false)
+                            $('#btnPreview').data('folder', 'http://' + SERVERIPADDRESS + '/images/' + $table.bootstrapTable('getSelections')[0].rma_ + '/');
+                            $('#btnPreview').data('image', $table.bootstrapTable('getSelections')[0].pic_name);
+                            $('#btnPreview').data('video', $table.bootstrapTable('getSelections')[0].video_name);
+                        }
+                        $('#editModal').modal('show');
+                    },
+                    attributes: {
+                        id: 'btnEdit',
+                        title: 'Edit a row',
+                        disabled: true
+                    }
+                }
+                
+            }
+        }
+        
+        function capitalizeFirstLetter(str){
+            if (!str)  
+                return str;
+            str=str.trim();
+            return str.charAt(0).toUpperCase()+str.slice(1).toLowerCase();
+        }
+        
+        $(function () {
+            'use strict'
+            let columns = [{
+                field: "state",
+                checkbox: true,
+                align: 'center',
+                valign: 'middle'
+            }, {
+                title: "RMA#",
+                field: "rma_",
+                sortable: false,
+                align: 'center',
+                valign: 'middle'
+            }, {
+                title: "Contact Date",
+                field: "contact_date",
+                sortable: true,
+                align: 'center',
+                valign: 'middle',
+                editable: {
+                    type: "date"
+                }
+            }, {
+                title: "Purchase Date",
+                field: "purchase_date",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+                editable: {
+                    type: "date",
+                }
+            }, {
+                title: "Contact ID",
+                field: "contact_id",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+                editable: {
+                    type: "text",
+                }
+            }, {
+                title: "Source of purchase",
+                field: "source_of_purchase",
+                sortable: false,
+                editable: {
+                    type: "select",
+                    options: {
+                        items: ["CQCN", "FENGYI", "SAM's", "LUNAR", "THONGHUA", "JIJIA", "TESLA", "BEEHE", "LOLLIPOP", "US MARKET", "OTHERS", "LRB"]
+                    }
+
+                },
+                align: 'center',
+                valign: 'middle',
+            }, {
+                title: "Factory",
+                field: "factory",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+                editable: {
+                    type: "select",
+                    options: {
+                        items: ["CL", "MJ", "CW", "QH", "VF", "JB", "HLF", "CH-BABY", "FS", "HOPE", "KL", "ZH-HELMET", "LELE", "YH"]
+                    }
+                }
+            }, {
+                title: "Item#",
+                field: "item_",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+            }, {
+                title: "Complaint Category Class l",
+                field: "complaint_category_class_i",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+                editable: {
+                    type: "select",
+                    options: {
+                        items: ["Product quality", "Customer reason"]
+                    }
+                }
+            }, {
+                title: "Complaint Category Class ll",
+                field: "complaint_category_class_ii",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+
+            }, {
+                title: "Defect Description",
+                field: "defect_description",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+                formatter: function (value, row, index) {
+                    if ((((row.pic_name != '') | (row.video_name != ''))&((row.pic_name != null) | (row.video_name != null))) & (row.defect_description != '-')) {
+                        return [
+                            '<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#imageModal" data-folder="http://' + SERVERIPADDRESS + '/images/' + row.rma_ + '/" data-image="' + row.pic_name + '" data-video="' + row.video_name + '">' + row.defect_description + '</button>'
+                        ].join('');
+                    }
+                    else
+                        return row.defect_description
+                }
+            },
+            {
+                title: "Defect Unit",
+                field: "defect_unit",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+                editable: {
+                    type: "number"
+                }
+            }, {
+                title: "Name",
+                field: "name",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+            }, {
+                title: "Phone NO.",
+                field: "number",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+            }, {
+                title: "Address",
+                field: "address",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+            }, {
+                title: "Parts NO.",
+                field: "parts_no",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+            }, {
+                title: "Action to take",
+                field: "action_to_be_taken",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+            }, {
+                title: "Courier",
+                field: "courier_",
+                sortable: false,
+                align: 'center',
+                valign: 'middle',
+            }, {
+                title: "Tracking#",
+                field: "tracking_",
+                sortable: true,
+                align: 'center',
+                valign: 'middle',
+            }, {
+                field: "pic_name",
+                visable: false
+            }, {
+                field: "video_name",
+                visable: false
+            }];
+
+            tableOptions = {
+                columns: columns,
+            }
+
+            $table.bootstrapTable(tableOptions)
+            console.log('nice!')
+
+            // 重写滚动条，并对下拉框的选项进行排序
+            $table.on('post-body.bs.table', function (event) {
+                if (ps) ps.destroy()
+                ps = new PerfectScrollbar('.fixed-table-body')
+
+                // sortSelectFilters()
+            })
+
+            // 日期filter框的占位符设置，并完成筛选
+            var dateInputStart = document.getElementById('contact_date_start');
+            var placeholderTextStart = document.getElementById('placeholder_for_contact_date_start');
+            dateInputStart.addEventListener('focus', function () {
+                placeholderTextStart.style.display = 'none'; // 在获得焦点时隐藏占位符
+                dateInputStart.style.color = 'black'
+            });
+
+            dateInputStart.addEventListener('blur', function () {
+                if (!dateInputStart.value) {
+                    placeholderTextStart.style.display = 'block'; // 如果日期为空，显示占位符
+                    dateInputStart.style.color = 'white'
+                }
+            });
+
+            var dateInputEnd = document.getElementById('contact_date_end');
+            var placeholderTextEnd = document.getElementById('placeholder_for_contact_date_end');
+            dateInputEnd.addEventListener('focus', function () {
+                placeholderTextEnd.style.display = 'none'; // 在获得焦点时隐藏占位符
+                dateInputEnd.style.color = 'black'
+            });
+
+            dateInputEnd.addEventListener('blur', function () {
+                if (!dateInputEnd.value) {
+                    placeholderTextEnd.style.display = 'block'; // 如果日期为空，显示占位符
+                    dateInputEnd.style.color = 'white'
+                }
+            });
+
+            $('#btnDateSearch').click(function () {
+                $table.bootstrapTable('refresh', { url: '/get-data' });
+                console.log('searching date')
+            })
+
+
+
+            document.querySelector('.bi-trash').parentElement.setAttribute('id', 'btnClearSearch');
+            $('#btnClearSearch').click(function () {
+                document.getElementById('contact_date_start').value = '';
+                document.getElementById('contact_date_end').value = '';
+                document.getElementById('contact_date_start').focus();
+                document.getElementById('contact_date_end').focus();
+                document.getElementById('contact_date_start').blur();
+                document.getElementById('contact_date_end').blur()
+
+                $table.bootstrapTable('refresh', { url: '/get-data' });
+            })
+            // $table.on('post-header.bs.table', function (event,field,text) {
+
+            //     console.log('post-header.bs.table')
+            //     var selectElement = document.querySelector('.filter-control .bootstrap-table-filter-control-' + selectElementField);
+            //     console.log(selectElement,selectElement.options)
+            //     console.log(optionValueToSelect,!!optionValueToSelect)
+            //     if (!!optionValueToSelect) {
+            //         // 遍历 select 元素中的 option 元素
+            //         for (let opt of selectElement.options) {
+            //             console.log(opt,opt.value)
+            //             if (opt.value === optionValueToSelect) {
+            //                 console.log('yes!')
+            //                 opt.selected = true;
+            //                 // console.log(opt)
+            //                 // option = opt;
+            //                 break; // 找到后退出循环
+            //             }
+            //         }
+
+            //         console.log('post-header.bs.table ook')
+            //     }
+
+            // })
+
+            // $table.on('column-search.bs.table', function (e, field, text) {
+            //     console.log('搜索字段：', field);
+            //     console.log('搜索文本：', text);
+            //     // 获取具有特定 class 的 select 元素
+            //     // selectElement = document.querySelector('.filter-control .bootstrap-table-filter-control-' + field);
+            //     selectElementField=field;
+
+            //     // 要选中的 option 的值
+            //     optionValueToSelect = text;
+
+            //     // if (!!optionValueToSelect) {
+            //     //     // 遍历 select 元素中的 option 元素
+            //     //     for (let opt of selectElement.options) {
+            //     //         if (opt.value === optionValueToSelect) {
+            //     //             // option.selected = true;
+            //     //             option = opt;
+            //     //             break; // 找到后退出循环
+            //     //         }
+            //     //     }
+
+
+            //     // }
+            //     console.log('column-search.bs.table')
+            // })
+
+            // 当表格中有被单选/多选的记录时，取消删除按钮的不可选
+            $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function () {
+                $('#btnDelete').prop('disabled', !$table.bootstrapTable('getSelections').length)
+            })
+
+            // 当表格中有被单选的记录时，取消编辑按钮的不可选
+            $table.on('check-all.bs.table check-some.bs.table', function () {
+                $('#btnEdit').prop('disabled', true)
+            })
+            // 当表格中有被多选（2+）的记录时，设置编辑按钮不可用；但只有一条记录被选，编辑按钮可用
+            $table.on('check.bs.table uncheck.bs.table uncheck-all.bs.table', function () {
+                if ($table.bootstrapTable('getSelections').length >= 2) {
+                    $('#btnEdit').prop('disabled', true)
+                } else {
+                    $('#btnEdit').prop('disabled', !$table.bootstrapTable('getSelections').length)
+                }
+            })
+
+
+            var selectedRow = null;
+            $table.on('click-row.bs.table', function (e, row, $element, field) {
+                selectedRow = $element[0]
+            })
+            // saveChangesButton.addEventListener('click', function () {
+            // var cells = selectedRow.querySelectorAll('td');
+            // cells[1].textContent = document.getElementById('edit-rma').value;
+            // cells[2].textContent = document.getElementById('edit-contact_date').value;
+            // cells[3].textContent = document.getElementById('edit-purchase_date').value;
+            // cells[4].textContent = document.getElementById('edit-contact_id').value;
+            // cells[5].textContent = document.getElementById('edit-source_of_purchase').value;
+            // cells[6].textContent = document.getElementById('edit-factory').value;
+            // cells[7].textContent = document.getElementById('edit-item').value;
+            // cells[8].textContent = document.getElementById('edit-complaint_category_class_i').value;
+            // cells[9].textContent = document.getElementById('edit-complaint_category_class_ii').value;
+            // cells[10].textContent = document.getElementById('edit-defect_description').value;
+            // cells[11].textContent = document.getElementById('edit-defect_unit').value;
+            // cells[12].textContent = document.getElementById('edit-name').value;
+            // cells[13].textContent = document.getElementById('edit-number').value;
+            // cells[14].textContent = document.getElementById('edit-address').value;
+            // cells[15].textContent = document.getElementById('edit-parts_no').value;
+            // cells[16].textContent = document.getElementById('edit-action_to_be_taken').value;
+            // cells[17].textContent = document.getElementById('edit-courier').value;
+            // cells[18].textContent = document.getElementById('edit-tracking').value;
+
+
+            // })
+            // 当模态框显示时，设置图片的 src 属性
+            $('#imageModal').on('show.bs.modal', function (event) {
+
+                var button = $(event.relatedTarget); // 触发模态框的按钮
+                // console.log(button[0])
+                // console.log(button[0].name)
+                var folder = button.data('folder'); // 获取记录相关图片与视频的存储路径
+
+                var imageSrc = button.data('image'); // 获取图片路径
+                var videoSrc = button.data('video'); // 获取图片路径
+
+                var modal = $(this);
+                var carouselInner = modal.find('.carousel-inner');
+                var carouselIndicator = modal.find('.carousel-indicators');
+                carouselInner.empty();
+                carouselIndicator.empty();
+
+                // ----动态添加图片和视频
+                var slideNum = 0;
+                if (imageSrc != '') {
+                    imageSrc.split(';').forEach(function (image) {
+                        let imageItem;
+                        if (button[0].name === 'btnPreview') {
+                            // imageItem = $('<div class="carousel-item"><img src="' + folder + image + '" class="d-block w-100" alt="Image"><div class="carousel-caption d-none d-md-block text-secondary"><h5>' + image + '</h5></div></div>');
+                            imageItem = $('<div class="carousel-item"><img src="' + folder + image + '" class="d-block w-100" alt="Image" title="' + image + '"></div>');
+
+                        }
+                        else {
+                            imageItem = $('<div class="carousel-item"><img src="' + folder + image + '" class="d-block w-100" alt="Image"></div>');
+                        }
+                        carouselInner.append(imageItem);
+
+                        var indicatorItem = $('<button type="button" data-bs-target="#mediaCarousel" data-bs-slide-to="' + slideNum + '"  style="background-color: grey;"></button>')
+                        carouselIndicator.append(indicatorItem)
+
+                        slideNum += 1;
+                    })
+                }
+                if (videoSrc != '') {
+                    videoSrc.split(';').forEach(function (video) {
+                        let videoItem;
+                        if (button[0].name === 'btnPreview') {
+                            // videoItem = $('<div class="carousel-item"><video class="video-slide" controls><source src="' + folder + video + '" type="video/mp4">Your browser does not support the video tag.</video><div class="carousel-caption d-none d-md-block text-secondary"><h5>' + video + '</h5></div></div>');
+                            videoItem = $('<div class="carousel-item"><video class="video-slide" controls title="' + video + '"><source src="' + folder + video + '" type="video/mp4">Your browser does not support the video tag.</video></div>');
+
+                        }
+                        else {
+                            videoItem = $('<div class="carousel-item"><video class="video-slide" controls><source src="' + folder + video + '" type="video/mp4">Your browser does not support the video tag.</video></div>');
+                        }
+                        carouselInner.append(videoItem);
+
+                        var indicatorItem = $('<button type="button" data-bs-target="#mediaCarousel" data-bs-slide-to="' + slideNum + '" style="background-color: grey;"></button>')
+                        carouselIndicator.append(indicatorItem)
+                        slideNum += 1;
+                    })
+                }
+
+                // 重置轮播到第一个项目
+                $('#mediaCarousel').find('.carousel-item').first().addClass('active');
+                $('#mediaCarousel').find('.carousel-indicators button').first().addClass('active');
+
+                // ----设置模态框宽度
+                var carousel = modal.find('#mediaCarousel');
+
+                // 当轮播切换时，根据当前轮播项内容设置模态框宽度，并将播放中的视频暂停
+                carousel.on('slid.bs.carousel', function () {
+                    var activeItem = carousel.find('.carousel-item.active');
+                    var mediaElements = activeItem.find('video');
+
+                    if (mediaElements.length != 0) {
+                        var contentWidth = mediaElements.width();
+                        modal.find('.modal-dialog').css('max-width', contentWidth + 'px');
+                        carouselIndicator.css('bottom', '5%');
+                    } else {
+                        modal.find('.modal-dialog').css('max-width', '');
+                        carouselIndicator.css('bottom', '0')
+
+                    }
+
+                    var videos = document.querySelectorAll('.video-slide');
+                    videos.forEach(function (video) {
+                        if (!video.paused) {
+                            console.log(video)
+                            video.pause();
+                        }
+                    });
+                });
+
+            });
+
+            // 当模态框隐藏时，清空图片的 src 属性
+            $('#imageModal').on('hide.bs.modal', function () {
+                $(this).find('img').attr('src', '');
+                $(this).find('video').attr('src', '');
+                $(this).find('.modal-dialog').css('max-width', '');
+                $(this).find('.carousel-indicators').css('bottom', '');
+                console.log('1111')
+                console.log($(this))
+                if ($('#btnBack').length > 0)
+                    $('#imageModal .modal-footer').remove();
+            });
+
+
+
+            //preview按钮
+            $('#btnPreview').click(function () {
+                var footer = document.createElement('div')
+                footer.classList.add('modal-footer')
+                var btnBack = document.createElement('button')
+                btnBack.classList.add('btn')
+                btnBack.classList.add('btn-light')
+                btnBack.innerText = "Back to edit"
+                footer.appendChild(btnBack)
+                // 将新创建的div添加到body中
+                document.querySelector('#imageModal .modal-content').append(footer)
+                $(document.querySelector('#imageModal .modal-footer button')).attr({
+                    'data-bs-target': "#editModal",
+                    'data-bs-toggle': "modal",
+                    'id': 'btnBack'
+                })
+            })
+            // const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+            // const alert = (message, type) => {
+            //     const wrapper = document.createElement('div')
+            //     wrapper.innerHTML = [
+            //         `<div class="alert alert-${type} alert-dismissible alert-dismissible fade show" role="alert">`,
+            //         `   <div>${message}</div>`,
+            //         '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            //         '</div>'
+            //     ].join('')
+
+            //     alertPlaceholder.append(wrapper)
+            // }
+
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // 循环并禁止提交
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    console.log("form")
+                    console.log(form)
+                    event.preventDefault();
+
+                    event.stopPropagation();
+                    if (form.checkValidity() === false) {
+                        console.log('-----------------------checkValidity==false')
+                        form.classList.add('was-validated');
+
+                        // 找到第一个验证失败的输入字段
+                        const firstInvalidInput = document.querySelector("#" + form.attributes.getNamedItem('id').value).querySelector(':invalid');
+
+                        // 如果找到了验证失败的输入字段，则滚动到它的位置
+                        if (firstInvalidInput) {
+                            console.log('找到了验证失败的输入字段')
+                            console.log(firstInvalidInput)
+                            firstInvalidInput.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            console.log('没有找到验证失败的输入字段')
+                        }
+                    } else {
+                        console.log('-----------------------checkValidity==true')
+                        var formId = form.attributes.getNamedItem('id').value;
+                        var modal;
+                        // 如果表单验证通过，则考虑后端返回值决定是否关闭模态框
+                        if (formId === "addRowForm") {
+                            Array.from($('#defect_description_pic')[0].files).forEach(function (f) {
+                                console.log(f)
+                            })
+                            // 获取表单数据
+                            var rma_ = $('#rma').val();
+                            var contact_date = $('#contact_date').val();
+                            // var purchase_date = $('#purchase_date').val().length == 0 ? null : $('#purchase_date').val();
+                            var purchase_date = $('#purchase_date').val();
+                            var contact_id = $('#contact_id').val();
+                            var item_ = $('#item').val().toUpperCase();
+                            var complaint_category_class_i = $('#complaint_category_class_i').val();
+                            var complaint_category_class_ii = $('#complaint_category_class_ii').val();
+                            var defect_description = $('#defect_description').val();
+                            var defect_description_media_list = Array.from($('#defect_description_pic')[0].files);
+                            var defect_unit = $('#defect_unit').val();
+                            var name = $('#name').val();
+                            var number = $('#number').val();
+                            var address = $('#address').val();
+                            var parts_no = $('#parts_no').val();
+                            var action_to_be_taken = $('#action_to_be_taken').val();
+                            var courier = $('#courier').val();
+                            var tracking_ = $('#tracking').val();
+                            var factory;
+                            if (factoryAddBtnClicked)
+                                factory = $('#inputNewFactory').val().toUpperCase();
+                            else
+                                factory = $('#factory').val();
+                        
+                            var source_of_purchase;
+                            if (sourceAddBtnClicked)
+                                source_of_purchase = $('#inputNewSource').val().toUpperCase();
+                            else
+                                source_of_purchase = $('#source_of_purchase').val();
+
+                            let dataJson = $('#addRowForm').serializeJSON();
+                            dataJson.rma = rma_;
+                            dataJson.factory = factory==='-'?'':factory ;
+                            dataJson.source_of_purchase = source_of_purchase==='-'?'':source_of_purchase;
+                            console.log(dataJson)
+                            console.log(JSON.stringify(dataJson))
+
+                            // 发送数据到后端
+                            $.ajax({
+                                url: '/add',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify(dataJson),
+                                success: function (data) {
+                                    if (data['message'].includes("re-enter")) {
+                                        alert(data['message']);
+                                    }
+                                    else {
+
+                                        var picture_name = '';
+                                        var video_name = '';
+                                        if (defect_description_media_list.length != 0) {
+                                            var pointer_pic = 1,pointer_video = 1;
+                                            var picList = [], videoList = [], keyList = [], picNameList = [], videoNameList = [];
+
+                                            // 自定义排序函数，确保 video 类型的文件排在 image 类型的文件后面
+                                            defect_description_media_list.sort(function (file1, file2) {
+                                                if (file1.type === 'image/jpeg' && file2.type === 'video/mp4') {
+                                                    return -1; // video 类型的文件排在 image 类型的文件后面
+                                                } else if (file1.type === 'video/mp4' && file2.type === 'image/jpeg') {
+                                                    return 1; // image 类型的文件排在 video 类型的文件前面
+                                                } else {
+                                                    return 0; // 保持原有顺序不变
+                                                }
+                                            });
+
+
+                                            defect_description_media_list.forEach(function (file) {
+                                                if (file.type.includes('image/')) {
+                                                    picList.push(file)
+                                                    picNameList.push(rma_ + '_pic_' + pointer_pic.toString() + '.' + file.name.split('.')[1])
+                                                    pointer_pic += 1;
+                                                }
+                                                // (file.type === 'video/mp4')
+                                                else if (file.type.includes('video/')) {
+                                                    videoList.push(file)
+                                                    videoNameList.push(rma_ + '_video_' + pointer_video.toString() + '.' + file.name.split('.')[1])
+                                                    pointer_video += 1;
+                                                }
+                                            })
+
+                                            var mediaForm = new FormData();
+                                            for (var i = 0; i < picList.length; i++) {
+                                                keyList.push("pic_" + (i + 1).toString())
+                                                mediaForm.append("pic_" + (i + 1).toString(), picList[i])
+                                                // picture_name += rma_ + "_" + "pic_" + (i + 1).toString() +'.' +picList[i].name.split('.')[1]
+                                            }
+                                            for (var i = 0; i < videoList.length; i++) {
+                                                keyList.push("video_" + (i + 1).toString())
+                                                mediaForm.append("video_" + (i + 1).toString(), videoList[i])
+                                                // picture_name += rma_ + "_" + "video_" + (i + 1).toString() + picList[i].name.split('.')[1]
+                                            }
+                                            mediaForm.append("media_id", rma_)
+                                            mediaForm.append("key", keyList.join('; '))
+
+                                            picture_name = picNameList.join(';');
+                                            video_name = videoNameList.join(';');
+                                            console.log(mediaForm)
+                                            console.log(picture_name)
+                                            console.log(video_name)
+                                            // 使用jQuery上传文件
+                                            $.ajax({
+                                                url: "/add_pic",
+                                                type: "POST",
+                                                data: mediaForm,
+                                                async: false,
+                                                contentType: false,
+                                                processData: false,
+                                                success: function (response) {
+                                                    data['message'] = data['message'] + "\n" + response['message']
+                                                },
+                                                error: function (xhr, status, error) {
+                                                    data['message'] = data['message'] + "\nPicture uploaded fail.";
+                                                }
+
+                                            });
+                                        }
+                                        else {
+                                            data['message'] = data['message'] + "(With no picture attached)"
+                                            picture_name = null
+                                            video_name = null
+                                        }
+                                        modal = bootstrap.Modal.getInstance(document.getElementById('addModal'));
+                                        modal.hide();
+
+                                        
+                                        // turn all the null value to '-', align with the table
+                                        let possible_null_value_list=[purchase_date,contact_id,source_of_purchase,factory,complaint_category_class_ii,defect_description,name,number,address,parts_no,action_to_be_taken,courier,tracking_]
+                                        for (let i = 0; i < possible_null_value_list.length; i++) {
+                                            if (possible_null_value_list[i]==='')
+                                                possible_null_value_list[i]='-'
+                                        }
+                                        
+                                        // make sure that for is executed
+                                        setTimeout(()=>{
+                                            // 添加新行到表格中
+                                            $table.bootstrapTable('insertRow', {
+                                                index: 0,
+                                                row: {
+                                                    state: '',
+                                                    rma_: rma_,
+                                                    contact_date: contact_date,
+                                                    item_: item_,
+                                                    complaint_category_class_i: complaint_category_class_i,
+                                                    defect_unit: defect_unit,
+                                                    pic_name: picture_name,
+                                                    video_name: video_name,
+                                                    // purchase_date: purchase_date,
+                                                    // contact_id: contact_id,
+                                                    // source_of_purchase: source_of_purchase,
+                                                    // factory: factory,
+                                                    // complaint_category_class_ii: complaint_category_class_ii,
+                                                    // defect_description: defect_description,
+                                                    // name: name,
+                                                    // number: number,
+                                                    // address: address,
+                                                    // parts_no: parts_no,
+                                                    // action_to_be_taken: action_to_be_taken,
+                                                    // courier_: courier,
+                                                    // tracking_: tracking_,
+                                                    
+                                                    purchase_date:possible_null_value_list[0],
+                                                    contact_id:possible_null_value_list[1],
+                                                    source_of_purchase:possible_null_value_list[2],
+                                                    factory:possible_null_value_list[3],
+                                                    complaint_category_class_ii: capitalizeFirstLetter(possible_null_value_list[4]),
+                                                    defect_description: capitalizeFirstLetter(possible_null_value_list[5]),
+                                                    name: possible_null_value_list[6],
+                                                    number: possible_null_value_list[7],
+                                                    address: possible_null_value_list[8],
+                                                    parts_no: possible_null_value_list[9],
+                                                    action_to_be_taken: possible_null_value_list[10],
+                                                    courier_: possible_null_value_list[11],
+                                                    tracking_: possible_null_value_list[12],
+                                                }
+                                            });
+
+                                        },0);
+                                        
+                                        
+
+                                        document.getElementById('messageToast').classList.remove('bg-danger-subtle')
+                                        document.getElementById('messageToast').classList.add('bg-success-subtle')
+                                        document.querySelector('#messageToast .toast-body').textContent = data['message'];
+
+                                        const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                        toast.show()
+
+
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    // console.error('Error adding data:', error);
+                                    document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                                    document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                                    document.querySelector('#messageToast .toast-body').textContent = 'Error adding data';
+
+                                    const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                    toast.show()
+                                }
+                            });
+                        }
+                        else if (formId === "editRowForm") {
+                            let rma_ = originalDataDict['rma'];
+                            var editDataDict = {}
+                            console.log("editDataDict")
+                            console.log(editDataDict)
+                            console.log("originalDataDict")
+                            console.log(originalDataDict)
+                            var tempForm = document.getElementById('editRowForm');
+                            for (var i = 0; i < tempForm.elements.length; i++) {
+                                if (tempForm.elements[i].type != 'button' & tempForm.elements[i].type != 'submit') {
+                                    if (tempForm.elements[i].id.indexOf('defect_description_pic') != -1)
+                                        continue;
+
+                                    console.log("key value in editDict:", tempForm.elements[i].id, tempForm.elements[i].value)
+                                    console.log("key value compare:", originalDataDict[tempForm.elements[i].id.replace('edit-', '')], tempForm.elements[i].value)
+                                    if (tempForm.elements[i].type === 'text' & originalDataDict[tempForm.elements[i].id.replace('edit-', '')] != tempForm.elements[i].value) {
+                                        if (tempForm.elements[i].id === 'edit-item')
+                                            tempForm.elements[i].value=tempForm.elements[i].value.toUpperCase()
+                                        editDataDict[tempForm.elements[i].id.replace('edit-', '')] = tempForm.elements[i].value
+                                    }
+                                    else if (tempForm.elements[i].type != 'text') {
+                                        if ((originalDataDict[tempForm.elements[i].id.replace('edit-', '')] === '-' | originalDataDict[tempForm.elements[i].id.replace('edit-', '')] === '') & tempForm.elements[i].value.length === 0) {
+                                            continue;
+                                        }
+                                        else if (originalDataDict[tempForm.elements[i].id.replace('edit-', '')] != tempForm.elements[i].value) {
+                                            editDataDict[tempForm.elements[i].id.replace('edit-', '')] = tempForm.elements[i].value
+                                        }
+                                    }
+                                }
+                            }
+                            console.log(editDataDict)
+
+                            var editConfirmMes = "Changes detected. Are you sure to make these changes?\n"
+                            for (var i = 0; i < Object.keys(editDataDict).length; i++) {
+                                var tempKey = Object.keys(editDataDict)[i]
+                                editConfirmMes = editConfirmMes.concat(tempKey + ": " + originalDataDict[tempKey] + " ---> " + editDataDict[tempKey] + "\n");
+                            }
+
+                            let picture_name = '';
+                            let video_name = '';
+                            let defect_description_media_list = Array.from($('#edit-defect_description_pic-after')[0].files);
+                            let mediaForm;
+                            if (defect_description_media_list.length > 0) {
+                                let p = 1;
+                                let picList = [], videoList = [], keyList = [], picNameList = [], videoNameList = [];
+
+                                // 自定义排序函数，确保 video 类型的文件排在 image 类型的文件后面
+                                defect_description_media_list.sort(function (file1, file2) {
+                                    if (file1.type === 'image/jpeg' && file2.type === 'video/mp4') {
+                                        return -1; // video 类型的文件排在 image 类型的文件后面
+                                    } else if (file1.type === 'video/mp4' && file2.type === 'image/jpeg') {
+                                        return 1; // image 类型的文件排在 video 类型的文件前面
+                                    } else {
+                                        return 0; // 保持原有顺序不变
+                                    }
+                                });
+
+
+                                defect_description_media_list.forEach(function (file) {
+                                    if (file.type === 'image/jpeg') {
+                                        picList.push(file)
+                                        picNameList.push(rma_ + '_' + p.toString() + '.' + file.name.split('.')[1])
+                                        p += 1;
+                                    }
+                                    else if (file.type === 'video/mp4') {
+                                        videoList.push(file)
+                                        videoNameList.push(rma_ + '_' + p.toString() + '.' + file.name.split('.')[1])
+                                        p += 1;
+                                    }
+                                })
+
+                                mediaForm = new FormData();
+                                for (let i = 0; i < picList.length; i++) {
+                                    keyList.push("pic_" + (i + 1).toString())
+                                    mediaForm.append("pic_" + (i + 1).toString(), picList[i])
+                                    // picture_name += rma_ + "_" + "pic_" + (i + 1).toString() +'.' +picList[i].name.split('.')[1]
+                                }
+                                for (let i = 0; i < videoList.length; i++) {
+                                    keyList.push("video_" + (i + 1).toString())
+                                    mediaForm.append("video_" + (i + 1).toString(), videoList[i])
+                                    // picture_name += rma_ + "_" + "video_" + (i + 1).toString() + picList[i].name.split('.')[1]
+                                }
+                                mediaForm.append("media_id", rma_)
+                                mediaForm.append("key", keyList.join('; '))
+                                mediaForm.append("requestFrom", 'edit')
+
+                                picture_name = picNameList.join(';');
+                                video_name = videoNameList.join(';');
+                                editConfirmMes = editConfirmMes.concat("defect description picture:" + originalDataDict['defect_description_pic'] + " ---> " + picture_name + ';' + video_name + "\n");
+                                console.log(mediaForm)
+                                console.log(picture_name)
+                                console.log(video_name)
+                                // editConfirmMes = editConfirmMes.concat("defect description picture:" + originalDataDict['defect_description_pic'] + " ---> " + $('#edit-defect_description_pic-after')[0].files[0].name + "\n")
+                            }
+
+
+                            if (window.confirm(editConfirmMes)) {
+                                //获得数据主键值
+                                editDataDict['id'] = originalDataDict['rma'];
+                                editDataDict['rma'] = originalDataDict['rma'];
+                                // 发送数据到后端
+                                $.ajax({
+                                    url: '/update',
+                                    type: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify(editDataDict),
+                                    success: function (data) {
+                                        if (data['message'].includes("No such RMA#")) {
+                                            alert(data['message']);
+                                        }
+                                        else {
+                                            if (defect_description_media_list.length > 0) {
+                                                // 使用jQuery上传文件
+                                                $.ajax({
+                                                    url: "/add_pic",
+                                                    type: "POST",
+                                                    data: mediaForm,
+                                                    async: false,
+                                                    contentType: false,
+                                                    processData: false,
+                                                    success: function (response) {
+                                                        data['message'] = data['message'] + "\n" + response['message']
+                                                    },
+                                                    error: function (xhr, status, error) {
+                                                        data['message'] = data['message'] + "\nPicture uploaded fail.";
+                                                    }
+
+                                                });
+                                                // picture_name = originalDataDict['rma'] + '.' + $('#edit-defect_description_pic-after')[0].files[0].name.split('.')[1];
+                                            }
+                                            else {
+                                                data['message'] = data['message'] + " (With no picture attached)"
+                                                picture_name = null;
+                                                video_name = null;
+                                            }
+                                            modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+                                            modal.hide();
+
+                                            console.log(selectedRow)
+                                            console.log(picture_name)
+                                            console.log(video_name)
+                                            $table.bootstrapTable('updateRow', {
+                                                index: selectedRow.attributes.getNamedItem('data-index').value,
+                                                row: {
+                                                    action_to_be_taken: document.getElementById('edit-action_to_be_taken').value,
+                                                    address: document.getElementById('edit-address').value,
+                                                    complaint_category_class_i: document.getElementById('edit-complaint_category_class_i').value,
+                                                    complaint_category_class_ii: document.getElementById('edit-complaint_category_class_ii').value,
+                                                    contact_date: document.getElementById('edit-contact_date').value,
+                                                    contact_id: document.getElementById('edit-contact_id').value,
+                                                    courier_: document.getElementById('edit-courier').value,
+                                                    defect_description: document.getElementById('edit-defect_description').value,
+                                                    defect_unit: document.getElementById('edit-defect_unit').value,
+                                                    factory: document.getElementById('edit-factory').value,
+                                                    item_: document.getElementById('edit-item').value,
+                                                    name: document.getElementById('edit-name').value,
+                                                    number: document.getElementById('edit-number').value,
+                                                    parts_no: document.getElementById('edit-parts_no').value,
+                                                    purchase_date: document.getElementById('edit-purchase_date').value,
+                                                    rma_: document.getElementById('edit-rma').value,
+                                                    source_of_purchase: document.getElementById('edit-source_of_purchase').value,
+                                                    state: true,
+                                                    tracking_: document.getElementById('edit-tracking').value,
+                                                    pic_name: picture_name,
+                                                    video_name: video_name
+                                                }
+                                            })
+
+
+                                            document.getElementById('messageToast').classList.remove('bg-danger-subtle')
+                                            document.getElementById('messageToast').classList.add('bg-success-subtle')
+                                            document.querySelector('#messageToast .toast-body').textContent = data['message'];
+
+                                            const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                            toast.show()
+
+                                            $table.bootstrapTable('uncheck', selectedRow.attributes.getNamedItem('data-index').value)
+                                            $('#btnEdit').prop('disabled', true)
+                                            delete editDataDict.id
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+
+                                        document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                                        document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                                        document.querySelector('#messageToast .toast-body').textContent = 'Error editing data';
+
+                                        const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                        toast.show()
+                                    }
+                                })
+                            }
+                        }
+                        else if(formId === "addRowsForm"){
+                            var uploadConfirmMes = "Are you sure to upload "+$('#file_uploaded')[0].files[0].name+" ?"
+                            if (window.confirm(uploadConfirmMes)) {
+                                var fileForm = new FormData();
+                                fileForm.append("file", Array.from($('#file_uploaded')[0].files)[0])
+
+                                // 使用jQuery上传文件
+                                $.ajax({
+                                    url: "/upload_records",
+                                    type: "POST",
+                                    data: fileForm,
+                                    async: false,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function (response) {
+                                        if (response['message'].includes("re-upload")) {
+                                            alert(response['message']);
+                                        }
+                                        else {
+                                            // data['message'] = data['message'] + "\n" + response['message']
+                                            modal = bootstrap.Modal.getInstance(document.getElementById('uploadFileModal'));
+                                            modal.hide();
+
+                                            // 添加新行到表格中
+                                            response['records'].sort((a,b)=>b.rma_-a.rma_)
+                                            // turn all the null value to '-', align with the table
+                                            let possible_null_value_list=['purchase_date','contact_id','source_of_purchase','factory','complaint_category_class_ii','defect_description','name','number','address','parts_no','action_to_be_taken','courier_','tracking_']
+                                            response['records'].forEach(function(record){
+                                                for (let i = 0; i < possible_null_value_list.length; i++) {
+                                                    if (record[possible_null_value_list[i]]==='')
+                                                        record[possible_null_value_list[i]]='-'
+                                                }
+                                            });
+                                            
+                                            console.log(response['records'])
+                                            $table.bootstrapTable('prepend', response['records']);
+
+                                            document.getElementById('messageToast').classList.remove('bg-danger-subtle')
+                                            document.getElementById('messageToast').classList.add('bg-success-subtle')
+                                            document.querySelector('#messageToast .toast-body').textContent = response['message'];
+
+                                            const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                            toast.show()
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                                        document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                                        document.querySelector('#messageToast .toast-body').textContent = 'Error uploading records';
+
+                                        const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                                        toast.show()
+                                    }
+
+                                });
+                            }
+                        }
+                    }
+                }, false);
+
+            });
+
+            // 在增加记录的模态框中，若单击新增工厂，另外两个input将disabled；相应地，在关闭模态框时，将恢复原来的disabled状态
+            $('#btnNewFactory').click(function () {
+                $('#inputNewFactory').prop('disabled', false);
+                $('#factory').prop('disabled', true);
+                factoryAddBtnClicked = true;
+            })
+            // 在增加记录的模态框中，若单击新增购买来源，另外两个input将disabled；相应地，在关闭模态框时，将恢复原来的disabled状态
+            $('#btnNewSource').click(function () {
+                $('#inputNewSource').prop('disabled', false);
+                $('#source_of_purchase').prop('disabled', true);
+                sourceAddBtnClicked = true;
+            })
+
+            // 在增加记录的模态框中，记录是否单击保存按钮
+            $('#saveAddBtn').click(function () {
+                saveAddBtnClicked = true;
+            })
+
+            // 当增加记录的模态框隐藏时（已设置逻辑为只有正确填写才可以隐藏模态框），重置表单以及相关输入的验证项
+            $('#addModal').on('hidden.bs.modal', function (event) {
+                let rma_ = $('#rma').val();
+                document.querySelector('#addRowForm').reset();
+                document.querySelector('#addRowForm').classList.remove('was-validated');
+
+                // 恢复原来两个input的disabled状态
+                $('#inputNewFactory').prop('disabled', true);
+                $('#factory').prop('disabled', false);
+
+                $('#inputNewSource').prop('disabled', true);
+                $('#source_of_purchase').prop('disabled', false);
+
+                // 清除已有的factory/source option，防止重复添加
+                document.getElementById('factory').innerHTML = '';
+                document.getElementById('source_of_purchase').innerHTML = '';
+
+
+                // if not click save button(like click cancel/close/other spaces in the page) causes modal hide, means needs to delete the pre-add record
+                if (!saveAddBtnClicked) {
+                    // 发送数据到后端
+                    $.ajax({
+                        url: '/add_cancel',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: rma_,
+                        success: function (data) {
+                            console.log(data['message'] + ' from canceling to add data.')
+                        },
+                        error: function (xhr, status, error) {
+                            // console.error('Error adding data:', error);
+                            document.getElementById('messageToast').classList.remove('bg-success-subtle')
+                            document.getElementById('messageToast').classList.add('bg-danger-subtle')
+                            document.querySelector('#messageToast .toast-body').textContent = 'Error adding data';
+
+                            const toast = new bootstrap.Toast(document.getElementById('messageToast'))
+                            toast.show()
+                        }
+                    });
+                }
+            });
+
+            // 当修改记录的模态框隐藏时（已设置逻辑为只有正确填写才可以隐藏模态框），重置验证项
+            $('#editModal').on('hidden.bs.modal', function () {
+                document.querySelector('#editRowForm').classList.remove('was-validated');
+
+                // 清除已有的factory/source option，防止重复添加
+                document.getElementById('edit-factory').innerHTML = '';
+                document.getElementById('edit-source_of_purchase').innerHTML = ''
+            });
+
+            // 当piliangzengjia记录的模态框隐藏时（已设置逻辑为只有正确填写才可以隐藏模态框），重置验证项
+            $('#uploadFileModal').on('hidden.bs.modal', function (event) {
+                document.querySelector('#addRowsForm').reset();
+                document.querySelector('#addRowsForm').classList.remove('was-validated');
+            });
+        });
+
+        // 对下拉框内容进行排序
+        function sortSelectFilters(select) {
+            setTimeout(() => {
+                const selectFilters = document.querySelectorAll('.filter-control select');
+
+                selectFilters.forEach(select => {
+                    const options = Array.from(select.options);
+                    options.sort((a, b) => a.text.localeCompare(b.text));
+                    select.innerHTML = '';
+                    options.forEach(option => select.add(option));
+                });
+            }, 500)
+
+            console.log('11111111111111111111111111111111111111111')
+        }
+
+        // contact date range选择
+        function queryParams(params) {
+            let dateStart = document.getElementById('contact_date_start').value;
+            let dateEnd = document.getElementById('contact_date_end').value;
+            params.dateStart = dateStart // add param1
+            params.dateEnd = dateEnd // add param2
+
+            if (!$table.bootstrapTable('getOptions').pagination)
+                params.limit = $table.bootstrapTable('getOptions').totalRows
+
+            return params // body data
+        }
+
+
+    </script>
+</body>
+
+</html>

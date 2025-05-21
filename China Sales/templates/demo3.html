@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>CS Search All</title>
+  <meta charset="UTF-8">
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/extensions/filter-control/bootstrap-table-filter-control.min.css">
+
+  <link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet" />
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.1/dist/extensions/sticky-header/bootstrap-table-sticky-header.css">
+    
+  <style>
+    /* CSS 样式，使图片自适应大小 */
+    .modal-body img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .button-container {
+      display: flex;
+      align-items: center;
+    }
+
+    /* 校验失败的元素样式 */
+    input:invalid {
+      border-color: #900;
+      background-color: #fdd;
+    }
+
+    input:focus:invalid {
+      outline: none;
+    }
+
+    /* 错误消息的样式 */
+    .error {
+      width: 100%;
+      padding: 0;
+
+      font-size: 80%;
+      color: white;
+      background-color: #900;
+      border-radius: 0 0 5px 5px;
+
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .error.active {
+      padding: 0.3em;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <h2>All Records:</h2><br>
+    <!-- <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" id="addRowBtn" class="btn btn-primary">Add</button>
+      <button type="button" id="remove" class="btn btn-danger" disabled>Delete</button>
+    </div> -->
+
+
+    <table id="table" data-buttons="buttons" data-show-refresh="true" data-multiple-select-row="false"
+      data-click-to-select="false" data-pagination="true" data-show-extended-pagination="true"
+      data-filter-control="true" data-show-search-clear-button="true" data-buttons-class="outline-secondary"
+      data-sticky-header="true">
+      <thead>
+        <tr>
+          <th data-checkbox="true">RMA#</th>
+          <th data-field="rma_">RMA#</th>
+          <th data-field="contact_date" data-filter-control="select" data-sortable="true">Contact Date</th>
+          <th data-field="purchase_date" data-filter-control="select">Purchase Date</th>
+          <th data-field="contact_id">Contact ID</th>
+          <th data-field="source_of_purchase" data-filter-control="select">Source of purchase</th>
+          <th data-field="factory" data-filter-control="select" editable='true'>Factory</th>
+          <th data-field="item_" data-filter-control="select">Item#</th>
+          <th data-field="complaint_category_class_i" data-filter-control="select">Complaint Category Class l</th>
+          <th data-field="complaint_category_class_ii">Complaint Category Class ll</th>
+          <th data-field="defect_description" data-filter-control="input">Defect Description</th>
+          <th data-field="defect_unit">Defect Unit</th>
+          <th data-field="name">Name</th>
+          <th data-field="number">Phone NO.</th>
+          <th data-field="address" data-filter-control="input">Address</th>
+          <th data-field="parts_no">Parts NO.</th>
+          <th data-field="action_to_be_taken">Action to take</th>
+          <th data-field="courier_">Courier</th>
+          <th data-field="tracking_" data-filter-control="input">Tracking#</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for r in records %}
+        <tr>
+          <td></td>
+          <td>{{ r.rma_ }}</td>
+          <td>{{ r.contact_date }}</td>
+          <td>{{ r.purchase_date }}</td>
+          <td>{{ r.contact_id }}</td>
+          <td>{{ r.source_of_purchase }}</td>
+          <td>{{ r.factory }}</td>
+          <td>{{ r.item_ }}</td>
+          <td>{{ r.complaint_category_class_i }}</td>
+          <td>{{ r.complaint_category_class_ii }}</td>
+          <td>
+            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#imageModal"
+              data-image="C:\Users\nwen\PycharmProjects\cs\images\tt.jpg">
+              {{ r.defect_description }}
+            </button>
+          </td>
+          <td>{{ r.defect_unit }}</td>
+          <td>{{ r.name }}</td>
+          <td>{{ r.number }}</td>
+          <td>{{ r.address }}</td>
+          <td>{{ r.parts_no }}</td>
+          <td>{{ r.action_to_be_taken }}</td>
+          <td>{{ r.courier_ }}</td>
+          <td>{{ r.tracking_ }}</td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 模态框 -->
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img src="" class="img-fluid" alt="Image">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="addModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- 模态框内容 -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Records</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- 表单元素 -->
+          <form class="requires-validation" id="addRowForm" method="post" novalidate>
+            <div class="form-group">
+              <label for="rma">RMA:</label>
+              <input type="text" class="form-control" id="rma" name="rma" placeholder="year(2 bits)+number(6 bits)"
+                maxlength="8" pattern="\d{8}" required>
+              <div class="valid-feedback">验证成功！</div>
+              <div class="invalid-feedback">请输入正确的编码！</div>
+            </div>
+            <div class="form-group">
+              <label for="contact_date">Contact Date:</label>
+              <input type="date" class="form-control" id="contact_date" name="contact_date">
+            </div>
+            <div class="form-group">
+              <label for="purchase_date">Purchase Date:</label>
+              <input type="date" class="form-control" id="purchase_date" name="purchase_date">
+            </div>
+            <div class="form-group">
+              <label for="contact_id">Contact ID:</label>
+              <input type="text" class="form-control" id="contact_id" name="contact_id">
+            </div>
+            <div class="form-group">
+              <label for="source_of_purchase">Source of purchase:</label>
+              <select class="form-select " id="source_of_purchase" name="source_of_purchase" style="width: 100%;"
+                dir="ltr">
+                <option value="FengYi">FengYi</option>
+                <option value="Sam's">Sam's</option>
+                <option value="Lollipop">Lollipop</option>
+                <option value="Behee">Behee</option>
+                <option value="Others">Others</option>
+                <option value="Lunaler">Lunaler</option>
+                <option value="Tesla">Tesla</option>
+                <option value="Thonghua">Thonghua</option>
+                <option value="Ji jia">Ji jia</option>
+                <option value="CQCN">CQCN</option>
+                <option value="Fengyi">Fengyi</option>
+                <option value="None">None</option>
+                <option value="US market">US market</option>
+              </select>
+              <!-- <input type="text" class="form-control" id="source_of_purchase" name="source_of_purchase"> -->
+            </div>
+            <div class="form-group">
+              <label for="factory">Factory:</label>
+              <select class="form-select" id="factory" name="factory" style="width: 100%;" dir="ltr">
+                <option value="CL">CL</option>
+                <option value="None">None</option>
+                <option value="Hope">Hope</option>
+                <option value="QH">QH</option>
+                <option value="CW">CW</option>
+                <option value="MJ">MJ</option>
+                <option value="Yinghao">Yinghao</option>
+                <option value="KL">KL</option>
+                <option value="FS">FS</option>
+                <option value="Joysun">Joysun</option>
+                <option value="JB">JB</option>
+                <option value="VF">VF</option>
+                <option value="ZH Helmet">ZH Helmet</option>
+              </select>
+              <!-- <input type="text" class="form-control" id="factory" name="factory"> -->
+            </div>
+            <div class="form-group">
+              <label for="item">Item#:</label>
+              <input type="text" class="form-control" id="item" name="item">
+            </div>
+            <div class="form-group">
+              <label for="complaint_category_class_i">Complaint Category Class l:</label>
+              <select class="form-select" id="complaint_category_class_i" name="complaint_category_class_i"
+                style="width: 100%;" dir="ltr">
+                <option value="Product Quality">Product Quality</option>
+                <option value="Customer Reason">Customer Reason</option>
+              </select>
+              <!-- <input type="text" class="form-control" id="complaint_category_class_i" name="complaint_category_class_i"> -->
+            </div>
+            <div class="form-group">
+              <label for="complaint_category_class_ii">Complaint Category Class ll:</label>
+              <input type="text" class="form-control" id="complaint_category_class_ii"
+                name="complaint_category_class_ii">
+            </div>
+            <div class="form-group">
+              <label for="defect_description">Defect Description:</label>
+              <input type="text" class="form-control" id="defect_description" name="defect_description">
+            </div>
+            <div class="form-group">
+              <label for="defect_unit">Defect Unit:</label>
+              <input type="number" class="form-control" id="defect_unit" name="defect_unit">
+            </div>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="number">Phone NO.:</label>
+              <input type="text" class="form-control" id="number" name="number">
+            </div>
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <input type="text" class="form-control" id="address" name="address">
+            </div>
+            <div class="form-group">
+              <label for="parts_no">Parts NO.:</label>
+              <input type="text" class="form-control" id="parts_no" name="parts_no">
+            </div>
+            <div class="form-group">
+              <label for="action_to_be_taken">Action to take:</label>
+              <input type="text" class="form-control" id="action_to_be_taken" name="action_to_be_taken">
+            </div>
+            <div class="form-group">
+              <label for="courier">Courier:</label>
+              <input type="text" class="form-control" id="courier" name="courier">
+            </div>
+            <div class="form-group">
+              <label for="tracking">Tracking#:</label>
+              <input type="text" class="form-control" id="tracking" name="tracking">
+            </div>
+
+            <!-- 其他表单元素 -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="saveBtn" data-bs-dismiss="modal">保存</button>
+          <button type="button" class="btn btn-default" data-bs-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <form method="post">
+    <br>
+    <input name="return" type="submit" value="Back">
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table.min.js"></script>
+  <script src="{{url_for('static',filename='js/bootstrap-table-editor.js')}}"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+  <script src="http://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.1/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js"></script>
+
+  <script>
+    var $table = $('#table')
+    var $remove = $('#remove')
+    var $add = $('#addRowBtn')
+    $('#addRowForm').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        rma: {
+          message: 'rma验证失败',
+          validators: {
+            notEmpty: {
+              message: 'rma不能为空'
+            },
+            regexp: {
+              regexp: /\d{8}/,
+              message: 'rma格式错误'
+            }
+          }
+        }
+      }
+    });
+
+    var bootstrapValidator = $('#addRowForm').data('bootstrapValidator');
+
+    function buttons() {
+      return {
+        btnAdd: {
+          text: 'Add new row',
+          icon: 'bi-plus-lg',
+          event: function () {
+            $('#addModal').modal('show');
+          },
+          attributes: {
+            title: 'Add a new row'
+          }
+        },
+        btnDelete: {
+          text: 'Delete rows',
+          icon: 'bi-dash-lg',
+          event: function () {
+            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+              return row.rma_
+            })
+
+            // 弹出警示框，点击确认后再进行删除
+            alert('You click delete button, rma#: : ' + JSON.stringify(ids))
+
+            // 发送数据到后端
+            $.ajax({
+              url: '/update',
+              type: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify(ids),
+              success: function (response) {
+                alert('Data deleted successfully');
+              },
+              error: function (xhr, status, error) {
+                console.error('Error deleting data:', error);
+              }
+            });
+
+            $table.bootstrapTable('remove', {
+              field: 'rma_',
+              values: ids
+            })
+            $remove.prop('disabled', true)
+          },
+          attributes: {
+            title: 'Delete row(s)'
+          }
+        },
+        btnEdit: {
+          id: 'btnEdit',
+          text: 'Edit a row',
+          icon: 'bi-pen',
+          event: function () {
+            $table.bootstrapTable('refreshOptions', { editable: true }); // 刷新表格选项
+            // $('#btnEdit').attr('class','btn btn-secondary')
+          },
+          attributes: {
+            title: 'Edit a row'
+          }
+        }
+      }
+    }
+    $(function () {
+
+      let columns = [{
+        field: "state",
+        checkbox: true,
+        editable: false,
+        align: 'center',
+        valign: 'middle'
+      },
+      {
+        title: "RMA#",
+        field: "rma_",
+        sortable: false,
+        editable: false,
+        align: 'center',
+        valign: 'middle'
+      },
+      {
+        title: "Contact Date",
+        field: "contact_date",
+        sortable: true,
+        align: 'center',
+        valign: 'middle',
+        editable: {
+          type: "date"
+        }
+      },
+      {
+        title: "Purchase Date",
+        field: "purchase_date",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: {
+          type: "date",
+        }
+      }, {
+        title: "Contact ID",
+        field: "contact_id",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: {
+          type: "text",
+        }
+      }, {
+        title: "Source of purchase",
+        field: "source_of_purchase",
+        sortable: false,
+        editable: {
+          type: "select",
+          options: {
+            items: ["CQCN", "FENGYI", "SAM's", "LUNAR", "THONGHUA", "JIJIA", "TESLA", "BEEHE", "LOLLIPOP", "US MARKET", "OTHERS", "LRB"]
+          }
+
+        },
+        align: 'center',
+        valign: 'middle',
+      }, {
+        title: "Factory",
+        field: "factory",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: {
+          type: "select",
+          options: {
+            items: ["CL", "MJ", "CW", "QH", "VF", "JB", "HLF", "CH-BABY", "FS", "HOPE", "KL", "ZH-HELMET", "LELE", "YH"]
+          }
+        }
+      }, {
+        title: "Item#",
+        field: "item_",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }, {
+        title: "Complaint Category Class l",
+        field: "complaint_category_class_i",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: {
+          type: "select",
+          options: {
+            items: ["Product quality", "Customer reason"]
+          }
+        }
+      }, {
+        title: "Complaint Category Class ll",
+        field: "complaint_category_class_ii",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }, {
+        title: "Defect Description",
+        field: "defect_description",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }, {
+        title: "Defect Unit",
+        field: "defect_unit",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: {
+          type: "number"
+        }
+      }, {
+        title: "Name",
+        field: "name",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }, {
+        title: "Phone NO.",
+        field: "number",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }, {
+        title: "Address",
+        field: "address",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }, {
+        title: "Parts NO.",
+        field: "parts_no",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }, {
+        title: "Action to take",
+        field: "action_to_be_taken",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }, {
+        title: "Courier",
+        field: "courier_",
+        sortable: false,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }, {
+        title: "Tracking#",
+        field: "tracking_",
+        sortable: true,
+        align: 'center',
+        valign: 'middle',
+        editable: true
+      }];
+
+      let tableOptions = {
+        columns: columns,
+        // editable: true, //editable需要设置为 true
+      }
+      $table.bootstrapTable(tableOptions)
+$table.on('post-body.bs.table', function (event) {
+                if (ps) ps.destroy()
+                ps = new PerfectScrollbar('.fixed-table-body')
+
+                // sortSelectFilters()
+            })
+      // Edit button click handler
+      // $table.on('click', '.edit-btn', function () {
+      //   var row = $(this).closest('tr');
+      //   // var editableCells = row.find('td]');
+      //   // 获取 SVG 元素
+      //   var svgIcon = $('#editIcon');
+      //   // 切换 SVG 图标
+      //   if (svgIcon.attr('class') === "bi bi-pencil-fill") {
+      //     // let tableOptions = $table.bootstrapTable('getOptions'); // 获取当前表格选项
+
+      //     // tableOptions.editable = true; // 将表格设置为可编辑状态
+      //     $table.bootstrapTable('refreshOptions', {editable:true}); // 刷新表格选项
+
+      //     // 修改 SVG 图标的属性，例如颜色
+      //     document.getElementById('editIcon').setAttribute('class', 'bi bi-check');
+      //     document.getElementById('editIconPath').setAttribute('d', "M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z");
+
+      //     // editableCells.attr('contenteditable', 'true').addClass('editable');
+
+      //   } else {
+      //     let tableOptions = $table.bootstrapTable('getOptions'); // 获取当前表格选项
+
+      //     tableOptions.editable = false; // 将表格设置为可编辑状态
+      //     $table.bootstrapTable('refreshOptions', tableOptions); // 刷新表格选项
+      //     // row.find('td[contenteditable="true"]').attr('contenteditable', 'false').removeClass('editable');
+      //     // 这里修改为第一次点击后的 SVG 内容
+      //     // 修改 SVG 图标的属性，例如颜色
+      //     document.getElementById('editIcon').setAttribute('class', 'bi bi-pencil-fill');
+      //     document.getElementById('editIconPath').setAttribute('d', 'M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z');
+
+      //     // svgIcon.attr('class', 'bi bi-pencil-fill');
+      //     // svgIcon.find('path').attr('d', 'M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z');
+
+      //   }
+      // });
+
+      // Delete button click handler
+      // $table.on('click', '.delete-btn', function () {
+      //   $(this).closest('tr').remove();
+      // });
+
+
+      // 当模态框显示时，设置图片的 src 属性
+      $('#imageModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // 触发模态框的按钮
+        var imageSrc = button.data('image'); // 获取图片路径
+        var modal = $(this);
+        modal.find('img').attr('src', imageSrc); // 设置模态框中图片的 src 属性
+      });
+
+      // 当模态框隐藏时，清空图片的 src 属性
+      $('#imageModal').on('hide.bs.modal', function () {
+        $(this).find('img').attr('src', '');
+      });
+
+      $table.on('refresh-options.bs.table', function (e, options) {
+
+        $('#btnEdit').attr('class', 'btn btn-secondary')
+        alert(JSON.stringify(options));
+      });
+      $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function () {
+        $remove.prop('disabled', !$table.bootstrapTable('getSelections').length)
+      })
+      $remove.click(function () {
+        var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+          return row.rma_
+        })
+
+        // 弹出警示框，点击确认后再进行删除
+        alert('You click delete button, rma#: : ' + JSON.stringify(ids))
+
+        // 发送数据到后端
+        $.ajax({
+          url: '/update',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(ids),
+          success: function (response) {
+            alert('Data deleted successfully');
+          },
+          error: function (xhr, status, error) {
+            console.error('Error deleting data:', error);
+          }
+        });
+
+        $table.bootstrapTable('remove', {
+          field: 'rma_',
+          values: ids
+        })
+        $remove.prop('disabled', true)
+      })
+
+
+
+      //---------------------- 点击保存按钮添加行
+      $('#saveBtn').click(function (e) {
+        bootstrapValidator.validate();
+        if (bootstrapValidator.isValid()) {
+          //表单提交的方法、比如ajax提交
+          alert('success');
+        
+        // 获取表单数据
+        var rma_ = $('#rma').val();
+        var contact_date = $('#contact_date').val();
+        var purchase_date = $('#purchase_date').val();
+        var contact_id = $('#contact_id').val();
+        var source_of_purchase = $('#source_of_purchase').val();
+        var factory = $('#factory').val();
+        var item_ = $('#item').val();
+        var complaint_category_class_i = $('#complaint_category_class_i').val();
+        var complaint_category_class_ii = $('#complaint_category_class_ii').val();
+        var defect_description = $('#defect_description').val();
+        var defect_unit = $('#defect_unit').val();
+        var name = $('#name').val();
+        var number = $('#number').val();
+        var address = $('#address').val();
+        var parts_no = $('#parts_no').val();
+        var action_to_be_taken = $('#action_to_be_taken').val();
+        var courier = $('#courier').val();
+        var tracking_ = $('#tracking').val();
+
+        // 构造新行的 HTML
+        // var newRow = '<tr><td>' + '' +
+        //   '</td><td>' + rma_ +
+        //   '</td><td>' + contact_date +
+        //   '</td><td>' + purchase_date +
+        //   '</td><td>' + contact_id +
+        //   '</td><td>' + source_of_purchase +
+        //   '</td><td>' + factory +
+        //   '</td><td>' + item_ +
+        //   '</td><td>' + complaint_category_class_i +
+        //   '</td><td>' + complaint_category_class_ii +
+        //   '</td><td>' + defect_description +
+        //   '</td><td>' + defect_unit +
+        //   '</td><td>' + name +
+        //   '</td><td>' + number +
+        //   '</td><td>' + address +
+        //   '</td><td>' + parts_no +
+        //   '</td><td>' + action_to_be_taken +
+        //   '</td><td>' + courier +
+        //   '</td></tr>' + tracking_ + '</td></tr>';
+        // $('#table tbody').append(newRow);
+        // 添加新行到表格中
+        $table.bootstrapTable('insertRow', {
+          index: 0,
+          row: {
+            state: '',
+            rma_: rma_,
+            contact_date: contact_date,
+            purchase_date: purchase_date,
+            contact_id: contact_id,
+            source_of_purchase: source_of_purchase,
+            factory: factory,
+            item_: item_,
+            complaint_category_class_i: complaint_category_class_i,
+            complaint_category_class_ii: complaint_category_class_ii,
+            defect_description: defect_description,
+            defect_unit: defect_unit,
+            name: name,
+            number: number,
+            address: address,
+            parts_no: parts_no,
+            action_to_be_taken: action_to_be_taken,
+            courier_: courier,
+            tracking_: tracking_
+          }
+        })
+
+        }
+        // }
+        else
+        {alert('fail');}
+      });
+
+    })
+  </script>
+</body>
+
+</html>
